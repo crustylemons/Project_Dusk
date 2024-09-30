@@ -18,7 +18,7 @@ public class TypingInputController : MonoBehaviour
 
     public void InitiatePlayerInput()
     {
-        
+           
     }
 
     IEnumerator WaitForCorrectInput(KeyCode key)
