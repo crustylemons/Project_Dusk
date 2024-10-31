@@ -2,43 +2,24 @@ using UnityEngine;
 
 public class Path : MonoBehaviour
 {
-    [SerializeField] private GameObject[] childObjects;
-    [SerializeField] private Transform[] pathPoints;
+    [SerializeField] private Vector2[] pathPoints;
+    private SpriteRenderer[] childRenderers;
 
     private void Awake()
     {
-        // Gets all tranforms of children + parent
-        Transform[] pointsWithParent = gameObject.GetComponentsInChildren<Transform>();
-        pathPoints = new Transform[pointsWithParent.Length - 1];
+        // Gets all child objects & intializes pathPoints' length
+        childRenderers = GetComponentsInChildren<SpriteRenderer>();
+        pathPoints = new Vector2[childRenderers.Length];
 
-        // Sets pathPoints without the parent's transform
-        int i = 0;
-        foreach (Transform t in pointsWithParent)
+        // Populate pathPoints & set renders to invisible
+        for (int i = 0; i < childRenderers.Length; i++)
         {
-            if (t != this.gameObject.transform) 
-            {
-                pathPoints[i] = t; 
-                i++;
-            }
-        }
-        childObjects = new GameObject[pathPoints.Length];
-
-        // Gets all child objects from the Transform array
-        int value = 0;
-        foreach (Transform t in pathPoints)
-        {
-            value++;
-            childObjects[value - 1] = t.gameObject;
-        }
-
-        // Makes points invisible while playing
-        foreach(GameObject point in childObjects)
-        {
-            point.GetComponent<SpriteRenderer>().enabled = false;
+            pathPoints[i] = childRenderers[i].transform.position;
+            childRenderers[i].enabled = false;
         }
     }
 
-    public Transform[] GetPathPoints()
+    public Vector2[] GetPathPoints()
     {
         return pathPoints;
     }

@@ -10,7 +10,7 @@ public class Cat : MonoBehaviour
     // currentPos is created because gameObject.transform is read only
     [SerializeField] private Transform currentPos;
 
-    [SerializeField] private Transform[] pathPoints;
+    [SerializeField] private Vector2[] pathPoints;
     [SerializeField] private int pathPointIndex = 0;
 
 
@@ -23,31 +23,23 @@ public class Cat : MonoBehaviour
 
         currentPos = transform;
         pathPoints = path.GetPathPoints();
-
-        GetPastPoint();
+        MoveToNextPoint();
     }
 
-    private void Update()
+
+    IEnumerator WaitForCorrectInput(KeyCode key)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MoveToNextPoint();
-        }
-    }
-    
-    private void GetPastPoint()
-    {
-        typingController.InitiatePlayerInput();
+        yield return new WaitUntil(() => Input.GetKeyDown(key));
         MoveToNextPoint();
     }
 
     public void MoveToNextPoint()
     {
-        currentPos.position = pathPoints[pathPointIndex].position;
+        currentPos.position = pathPoints[pathPointIndex];
         pathPointIndex++;
 
         cam.UpdateCameraPos(currentPos.transform);
 
-        GetPastPoint();
+        StartCoroutine(WaitForCorrectInput(KeyCode.Space));
     }
 }
