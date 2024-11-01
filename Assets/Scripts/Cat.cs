@@ -4,7 +4,6 @@ using UnityEngine;
 public class Cat : MonoBehaviour
 {
     [SerializeField] private Path path;
-    [SerializeField] private MyCamera cam;
     [SerializeField] private TypingInputController typingController;
 
     // currentPos is created because gameObject.transform is read only
@@ -23,23 +22,25 @@ public class Cat : MonoBehaviour
 
         currentPos = transform;
         pathPoints = path.GetPathPoints();
-        MoveToNextPoint();
+        StartCoroutine(WaitForCorrectInput(KeyCode.Space));
     }
 
 
-    IEnumerator WaitForCorrectInput(KeyCode key)
+    private IEnumerator WaitForCorrectInput(KeyCode key)
     {
-        yield return new WaitUntil(() => Input.GetKeyDown(key));
-        MoveToNextPoint();
+        while (pathPointIndex <= pathPoints.Length - 1)
+        {
+            yield return new WaitUntil(() => Input.GetKeyDown(key));
+            MoveToNextPoint();
+            yield return null;
+        }
+        Debug.Log("No more path points left");
     }
 
     public void MoveToNextPoint()
     {
         currentPos.position = pathPoints[pathPointIndex];
         pathPointIndex++;
-
-        cam.UpdateCameraPos(currentPos.transform);
-
-        StartCoroutine(WaitForCorrectInput(KeyCode.Space));
     }
+
 }

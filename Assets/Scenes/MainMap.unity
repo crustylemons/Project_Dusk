@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b447645ed2c30744bb961ac4d7b2f1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cat: {fileID: 749307409}
 --- !u!1 &232813752
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94cc7c9ed034674e9465b59cbd44b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childObjects: []
   pathPoints: []
 --- !u!4 &452855736
 Transform:
@@ -1145,7 +1145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 452855735}
-  cam: {fileID: 202876118}
   typingController: {fileID: 1541650907}
   currentPos: {fileID: 0}
   pathPoints: []

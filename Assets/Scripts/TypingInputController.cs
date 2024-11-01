@@ -5,24 +5,5 @@ using UnityEngine;
 
 public class TypingInputController : MonoBehaviour
 {
-    [SerializeField] private Path path;
 
-    [Tooltip("")]
-    [SerializeField] private char[] letters;
-
-    private void Start()
-    {
-        path = FindFirstObjectByType<Path>();
-        letters = new char[path.GetPathPoints().Length];
-    }
-
-    public void InitiatePlayerInput()
-    {
-        StartCoroutine(WaitForCorrectInput(KeyCode.Space));
-    }
-
-    IEnumerator WaitForCorrectInput(KeyCode key)
-    {
-        yield return new WaitUntil(() => Input.GetKeyDown(key));
-    }
 }
