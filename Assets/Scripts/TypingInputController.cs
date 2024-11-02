@@ -15,6 +15,8 @@ public class TypingInputController : MonoBehaviour
     [SerializeField] private Text wordDisplay;
     [SerializeField] private Text typedDisplay;
 
+
+
     private void Start()
     {
         // Get path points

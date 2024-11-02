@@ -14,7 +14,8 @@ public class Path : MonoBehaviour
         // Populate pathPoints & set renders to invisible
         for (int i = 0; i < childRenderers.Length; i++)
         {
-            pathPoints[i] = childRenderers[i].transform.position;
+            pathPoints[i] = new Vector2(Mathf.Round((childRenderers[i].transform.position.x * 100)/100), 
+                Mathf.Round((childRenderers[i].transform.position.y * 100)/100));
             childRenderers[i].enabled = false;
         }
     }
