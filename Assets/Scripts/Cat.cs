@@ -29,4 +29,5 @@ public class Cat : MonoBehaviour
         }
     }
 
+    public Animator GetAnimator() { return animator; }
 }
