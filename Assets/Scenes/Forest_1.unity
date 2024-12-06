@@ -8638,8 +8638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 1589833137}
-  dialogueText: {fileID: 1961712796}
-  isPrintingDialogue: 0
+  dialogueText: {fileID: 1961712798}
+  isPrintingDialogue: 1
   skipToFullText: 0
 --- !u!4 &964132263
 Transform:
@@ -9701,7 +9701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589833139
@@ -10043,7 +10043,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the dialogue!
+  m_Text: This is my example dialogue
 --- !u!222 &1961712799
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -19,16 +18,17 @@ public class CutsceneController : MonoBehaviour
         catAnimator = cat.GetAnimator();
     }
 
-    public IEnumerator WaitForInput()
+    private IEnumerator WaitForDialogue()
     {
-        
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        yield return new WaitUntil(() => dialogueController.GetIsPrintingDialogue() == false);
         cutscenes[0].GetComponent<PlayableDirector>().Play();
     }
 
     public void StartDialogue()
     {
+        // Initiates dialogue
         dialogueController.PrintDialogue(cutscenes[0].GetDialogue());
+        StartCoroutine(WaitForDialogue());
         catAnimator.SetBool("IsSitting", true);
     }
 

@@ -8,7 +8,6 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private Text dialogueText;
 
-
     [SerializeField] private bool isPrintingDialogue = false;
     [SerializeField] private bool skipToFullText = false;
 
@@ -75,4 +74,6 @@ public class DialogueController : MonoBehaviour
             yield return new WaitForSeconds(0.08f);
         }
     }
+
+    public bool GetIsPrintingDialogue() { return isPrintingDialogue; }
 }
