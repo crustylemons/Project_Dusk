@@ -21,7 +21,7 @@ public class CutsceneController : MonoBehaviour
     private IEnumerator WaitForDialogue()
     {
         yield return new WaitUntil(() => dialogueController.GetIsPrintingDialogue() == false);
-        cutscenes[0].GetComponent<PlayableDirector>().Play();
+        cutscenes[0].gameObject.GetComponent<PlayableDirector>().Play();
     }
 
     public void StartDialogue()
@@ -35,7 +35,7 @@ public class CutsceneController : MonoBehaviour
     public void StartGameplay()
     {
         catAnimator.SetBool("IsSitting", false);
-        cutscenes[0].GetComponent<PlayableDirector>().Stop();
+        cutscenes[0].gameObject.GetComponent<PlayableDirector>().Stop();
     }
 }
 

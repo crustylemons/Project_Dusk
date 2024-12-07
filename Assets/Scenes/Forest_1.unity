@@ -8639,7 +8639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 1589833137}
   dialogueText: {fileID: 1961712798}
-  isPrintingDialogue: 1
+  isPrintingDialogue: 0
   skipToFullText: 0
 --- !u!4 &964132263
 Transform:
