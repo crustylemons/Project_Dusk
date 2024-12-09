@@ -14,6 +14,7 @@ public class Cat : MonoBehaviour
 
     private void Update()
     {
+
         // Creates smooth transition with cat movement
         gameObject.transform.position = Vector2.SmoothDamp(gameObject.transform.position, typingController.GetTargetPos(), ref velocity, smoothTime);
 
@@ -22,11 +23,21 @@ public class Cat : MonoBehaviour
         if (currentPos != typingController.GetTargetPos())
         {
             animator.SetBool("IsMoving", true);
+
         }
         else
         {
             animator.SetBool("IsMoving", false);
         }
+
+            if (currentPos.x < typingController.GetTargetPos().x)
+            {
+                transform.rotation.Set(0,180,0,0);
+            }
+            else
+            {
+                transform.rotation.Set(0, 0, 0, 0);
+            }
     }
 
     public Animator GetAnimator() { return animator; }

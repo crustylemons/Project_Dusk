@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +6,7 @@ public class DialogueController : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private Text dialogueText;
+    [SerializeField] private Text spaceToContinue;
 
     [SerializeField] private bool isPrintingDialogue = false;
     [SerializeField] private bool skipToFullText = false;
@@ -36,23 +36,24 @@ public class DialogueController : MonoBehaviour
     {
         isPrintingDialogue = true;
 
+        // iterate through the each given dialogue
         foreach (string d in dialogues)
         {
             // Start printing dialogue
             yield return StartCoroutine(PrintStringSlowly(d));
 
-            
             if (!skipToFullText)
             {
-                Debug.Log("Waiting for input...");
+                spaceToContinue.gameObject.SetActive(true);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
             }
             skipToFullText = false;
+            spaceToContinue.gameObject.SetActive(false);
         }
 
         // Make dialogue box inactive and let process know it's done printing
         isPrintingDialogue = false;
-        dialogueBox.SetActive(false);
+        spaceToContinue.gameObject.SetActive(false);
         dialogueText.gameObject.SetActive(false);
     }
 
@@ -66,7 +67,7 @@ public class DialogueController : MonoBehaviour
             if (skipToFullText)
             {
                 dialogueText.text = givenDialogue;
-                Debug.Log("Waiting for input...");
+                spaceToContinue.gameObject.SetActive(true);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
                 break;
             }

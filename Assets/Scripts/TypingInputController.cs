@@ -15,6 +15,7 @@ public class TypingInputController : MonoBehaviour
     [SerializeField] private Text wordDisplay;
     [SerializeField] private Text typedDisplay;
 
+    [SerializeField] private CutsceneController cutsceneController;
 
 
     private void Start()
@@ -22,8 +23,12 @@ public class TypingInputController : MonoBehaviour
         // Get path points
         path = FindFirstObjectByType<Path>();
         pathPoints = path.GetPathPoints();
+    }
 
-        StartCoroutine(ProgressPathWaiter(words));
+    // Start the path progression gameplay
+    public void StartPathCoroutine()
+    {
+        StartCoroutine(ProgressPathWaiter(words));   
     }
 
     public Vector2 GetTargetPos() { return targetPos; }
@@ -52,8 +57,9 @@ public class TypingInputController : MonoBehaviour
             MoveToNextPoint();
             yield return null;
         }
-
+         
         Debug.Log("No more path points left");
+        cutsceneController.StartNextCutscene();
     }
 
 
