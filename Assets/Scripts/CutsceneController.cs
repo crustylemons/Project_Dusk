@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -12,7 +11,7 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private DialogueController dialogueController;
 
     [SerializeField] private Cutscene[] cutscenes;
-
+    
     private void Start()
     {
         cat = FindFirstObjectByType<Cat>();

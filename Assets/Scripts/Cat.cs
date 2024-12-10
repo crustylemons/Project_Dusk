@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Cat : MonoBehaviour
@@ -10,6 +11,8 @@ public class Cat : MonoBehaviour
     // Variables for smooth walking
     private float smoothTime = 0.3f;
     private Vector2 velocity = Vector3.zero;
+
+    private bool isFacingLeft = false;
 
 
     private void Update()
@@ -23,21 +26,29 @@ public class Cat : MonoBehaviour
         if (currentPos != typingController.GetTargetPos())
         {
             animator.SetBool("IsMoving", true);
-
         }
         else
         {
             animator.SetBool("IsMoving", false);
         }
 
-            if (currentPos.x < typingController.GetTargetPos().x)
+
+        if (currentPos.x > typingController.GetTargetPos().x)
+        {
+            if (!isFacingLeft)
             {
-                transform.rotation.Set(0,180,0,0);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+
             }
-            else
+        }
+        else
+        {
+            if (isFacingLeft)
             {
-                transform.rotation.Set(0, 0, 0, 0);
+                transform.rotation = Quaternion.Euler(0,0,0);
+                isFacingLeft = false;
             }
+        }
     }
 
     public Animator GetAnimator() { return animator; }

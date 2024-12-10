@@ -57,8 +57,9 @@ public class TypingInputController : MonoBehaviour
             MoveToNextPoint();
             yield return null;
         }
-         
+
         Debug.Log("No more path points left");
+        targetPos = new Vector2(-1, 27);
         cutsceneController.StartNextCutscene();
     }
 
