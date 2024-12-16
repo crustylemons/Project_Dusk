@@ -1,11 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MyCamera : MonoBehaviour
 {
     [SerializeField] private Cat cat;
+    [SerializeField] private GameObject blackTransition;
+
 
     private float smoothTime = 0.25f;
     private Vector3 velocity = Vector3.zero;
+
+    private void Awake()
+    {
+        blackTransition.SetActive(true);
+    }
 
     private void Update()
     {

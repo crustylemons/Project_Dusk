@@ -15,7 +15,6 @@ public class CutsceneController : MonoBehaviour
     private void Start()
     {
         cat = FindFirstObjectByType<Cat>();
-        catAnimator = cat.GetAnimator();
     }
 
     private IEnumerator WaitForDialogue()
