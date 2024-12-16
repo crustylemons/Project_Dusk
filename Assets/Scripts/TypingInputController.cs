@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ public class TypingInputController : MonoBehaviour
     [SerializeField] private Text typedDisplay;
 
     [SerializeField] private CutsceneController cutsceneController;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource jumpSFXSource;
 
 
     private void Start()
@@ -66,6 +70,7 @@ public class TypingInputController : MonoBehaviour
 
     private void MoveToNextPoint()
     {
+        jumpSFXSource.Play();
         targetPos = pathPoints[pathPointIndex];
         pathPointIndex++;
     }
