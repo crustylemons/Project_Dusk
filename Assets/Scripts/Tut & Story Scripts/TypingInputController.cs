@@ -16,6 +16,7 @@ public class TypingInputController : MonoBehaviour
     [SerializeField] private Text wordDisplay;
     [SerializeField] private Text typedDisplay;
 
+    [Header("Cutscenes")]
     [SerializeField] private CutsceneController cutsceneController;
 
     [Header("Audio")]
@@ -64,7 +65,7 @@ public class TypingInputController : MonoBehaviour
 
         Debug.Log("No more path points left");
         targetPos = new Vector2(-1, 27);
-        cutsceneController.StartNextCutscene();
+        cutsceneController.StartCutscene(cutsceneController.GetNextUnplayedCutscene().GetName());
     }
 
 

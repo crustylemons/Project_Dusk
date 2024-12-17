@@ -46,16 +46,28 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
-    public void StartNextCutscene()
+    public void StartCutscene(string name)
+    {
+        foreach (Cutscene c in cutscenes)
+        {
+            if (c.GetHasPlayed() == false && c.GetName() == name)
+            {
+                c.gameObject.GetComponent<PlayableDirector>().Play();
+                break;
+            }
+        }
+    }
+
+    public Cutscene GetNextUnplayedCutscene()
     {
         foreach (Cutscene c in cutscenes)
         {
             if (c.GetHasPlayed() == false)
             {
-                c.GetComponent<PlayableDirector>().Play();
-                break;
+                return c;
             }
         }
+        return null;
     }
 }
 

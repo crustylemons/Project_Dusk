@@ -8,8 +8,15 @@ public class MyHomeCamera : MonoBehaviour
     [SerializeField] private Vector2 minBounds;
     [SerializeField] private Vector2 maxBounds;
 
+    [SerializeField] private GameObject blackTransition;
+
     private Vector3 dragOrigin;
     private Camera cam;
+
+    private void Awake()
+    {
+        blackTransition.SetActive(true);
+    }
 
     private void Start()
     {
@@ -50,16 +57,6 @@ public class MyHomeCamera : MonoBehaviour
         float clampedY = Mathf.Clamp(targetPos.y, minBounds.y + cameraHalfHeight, maxBounds.y - cameraHalfHeight);
 
         return new Vector3(clampedX, clampedY, targetPos.z);
-    }
-
-    private void OnDrawGizmos()
-    {
-        // Draw bounds in the editor for visualization
-        Gizmos.color = Color.white;
-        Gizmos.DrawLine(new Vector3(minBounds.x, minBounds.y, 0), new Vector3(maxBounds.x, minBounds.y, 0));
-        Gizmos.DrawLine(new Vector3(maxBounds.x, minBounds.y, 0), new Vector3(maxBounds.x, maxBounds.y, 0));
-        Gizmos.DrawLine(new Vector3(maxBounds.x, maxBounds.y, 0), new Vector3(minBounds.x, maxBounds.y, 0));
-        Gizmos.DrawLine(new Vector3(minBounds.x, maxBounds.y, 0), new Vector3(minBounds.x, minBounds.y, 0));
     }
 
 }

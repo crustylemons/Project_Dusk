@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCursorVisible: 0
-  cursorTexture: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+  defaultCursorTexture: {fileID: 0}
 --- !u!1 &97910612
 GameObject:
   m_ObjectHideFlags: 0
@@ -11248,7 +11248,7 @@ GameObject:
   - component: {fileID: 12725497300944310}
   - component: {fileID: 6995986397772774469}
   m_Layer: 0
-  m_Name: Cat-2
+  m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11333,8 +11333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d86d67f287492249a6054c62896ecb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typingController: {fileID: 1541650907}
   animator: {fileID: 957902179117685190}
+  typingController: {fileID: 1541650907}
+  idk: 0
 --- !u!82 &6995986397772774469
 AudioSource:
   m_ObjectHideFlags: 0

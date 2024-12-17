@@ -13,9 +13,13 @@ public class Cat : MonoBehaviour
     private bool isFacingLeft = false;
     
     [Header("General")]
-    [SerializeField] private TypingInputController typingController;
     [SerializeField] private Animator animator;
 
+    [Header("Tutorial & Story")]
+    [SerializeField] private TypingInputController typingController;
+
+    [Header("Dynamic Typing Test")]
+    [SerializeField] private bool idk;
 
     private void Update()
     {
