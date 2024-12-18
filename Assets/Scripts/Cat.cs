@@ -18,8 +18,6 @@ public class Cat : MonoBehaviour
     [Header("Tutorial & Story")]
     [SerializeField] private TypingInputController typingController;
 
-    [Header("Dynamic Typing Test")]
-    [SerializeField] private bool idk;
 
     private void Update()
     {
