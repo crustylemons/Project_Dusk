@@ -5,7 +5,6 @@ using UnityEngine;
 public class Cat : MonoBehaviour
 {
 
-
     // Variables for smooth walking
     private float smoothTime = 0.3f;
     private Vector2 velocity = Vector3.zero;
@@ -40,7 +39,6 @@ public class Cat : MonoBehaviour
             if (!isFacingLeft)
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-
             }
         }
         else

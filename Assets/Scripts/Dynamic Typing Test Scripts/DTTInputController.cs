@@ -1,12 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class DynamicTypingInputController : MonoBehaviour
+public class DTTInputController : MonoBehaviour
 {
     [SerializeField] private string[] possibleWords;
 
+    [SerializeField] private SceneManagement sceneManagement;
     [SerializeField] private Animator catAnimator;
+
+    [Header("Statistics")]
+    [SerializeField] private PlayerStatsManager playerStatsManager;
+    [SerializeField] private float secondsTyped;
+    [SerializeField] private int correctCharactersTyped;
+    [SerializeField] private int seconds = 30;
+    [SerializeField] private int secondsLeft = 30;
+
+    private bool timerIsGoing;
 
     [Header("UI")]
     [SerializeField] private Text upcomingWordDisplay;
@@ -19,6 +30,14 @@ public class DynamicTypingInputController : MonoBehaviour
         catAnimator.SetBool("IsMoving", true);
         GenerateUpcomingText();
         StartCoroutine(GetPlayerInput());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            sceneManagement.LoadScene("Home");
+        }
     }
 
     private void GenerateUpcomingText()
@@ -46,7 +65,8 @@ public class DynamicTypingInputController : MonoBehaviour
 
     private IEnumerator GetPlayerInput()
     {
-        while (true)
+        StartCoroutine(Timer());
+        while (timerIsGoing)
         {
             foreach (char c in wordDisplay.text)
             {
@@ -58,11 +78,12 @@ public class DynamicTypingInputController : MonoBehaviour
                     if (Input.inputString.ToLower() == c.ToString().ToLower())
                     {
                         typedDisplay.text += c;
+                        correctCharactersTyped++;
                         break; // Exit the loop and proceed to the next character
                     }
                     else
                     {
-                        Debug.Log($"Incorrect letter: Expected {c}");
+                        //Debug.Log($"Incorrect letter: Expected {c}");
                     }
                 }
             }
@@ -72,5 +93,22 @@ public class DynamicTypingInputController : MonoBehaviour
             wordDisplay.text = "";
             GenerateUpcomingText();
         }
+        upcomingWordDisplay.text = "";
+        typedDisplay.text = "";
+        wordDisplay.text = "";
+        playerStatsManager.SetWordsPerMinute(correctCharactersTyped, seconds/60f);
+        typedDisplay.text = "WPM = " + playerStatsManager.GetWordsPerMinute().ToString();
     }
+
+    private IEnumerator Timer()
+    {
+        timerIsGoing = true;
+        for (int i = seconds; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            secondsLeft--;
+        }
+        timerIsGoing = false;
+    }
+
 }
