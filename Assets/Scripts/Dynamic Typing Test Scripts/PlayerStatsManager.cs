@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
+    [SerializeField] private DTTUIController UIController;
+
+    [Header("Statistics")]
     [SerializeField] private float wordsPerMinute;
     [SerializeField] private float currentSpeed;
     [SerializeField] private float accuracy;
+
+
 
     public float GetAccuracy() { return accuracy; }
 
@@ -26,6 +31,18 @@ public class PlayerStatsManager : MonoBehaviour
         Debug.Log("KSPR: " + keyStokesPerMinute);
 
         wordsPerMinute = Mathf.Clamp(keyStokesPerMinute / minutes, 0.0001f, 1000f);
-        Debug.Log("WPM: " + wordsPerMinute);
+
+        // Displaying
+        UIController.SetWPM(Mathf.RoundToInt(wordsPerMinute));
+        Debug.Log($"WPM: {wordsPerMinute}");
+    }
+
+    public void SetAccuracy(int correctKeysPressed, int totalKeysPressed)
+    {
+        accuracy = (correctKeysPressed / totalKeysPressed) * 100;
+
+        // Displaying
+        UIController.SetAccuracy(Mathf.RoundToInt(accuracy));
+        Debug.Log($"Accuracy: {accuracy}");
     }
 }

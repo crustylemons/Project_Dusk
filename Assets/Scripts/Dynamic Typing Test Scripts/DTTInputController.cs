@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
@@ -13,13 +14,15 @@ public class DTTInputController : MonoBehaviour
     [Header("Statistics")]
     [SerializeField] private PlayerStatsManager playerStatsManager;
     [SerializeField] private float secondsTyped;
-    [SerializeField] private int correctCharactersTyped;
+    private int correctCharactersTyped;
+    private int charactersTyped;
     [SerializeField] private int seconds = 30;
     [SerializeField] private int secondsLeft = 30;
 
     private bool timerIsGoing;
 
     [Header("UI")]
+    [SerializeField] private GameObject WordBox;
     [SerializeField] private Text upcomingWordDisplay;
     [SerializeField] private Text wordDisplay;
     [SerializeField] private Text typedDisplay;
@@ -85,6 +88,8 @@ public class DTTInputController : MonoBehaviour
                     {
                         //Debug.Log($"Incorrect letter: Expected {c}");
                     }
+
+                    charactersTyped++;
                 }
             }
 
@@ -93,11 +98,11 @@ public class DTTInputController : MonoBehaviour
             wordDisplay.text = "";
             GenerateUpcomingText();
         }
-        upcomingWordDisplay.text = "";
-        typedDisplay.text = "";
-        wordDisplay.text = "";
+
+        // Ending test actions
+        WordBox.SetActive(false);
         playerStatsManager.SetWordsPerMinute(correctCharactersTyped, seconds/60f);
-        typedDisplay.text = "WPM = " + playerStatsManager.GetWordsPerMinute().ToString();
+        playerStatsManager.SetAccuracy(correctCharactersTyped, charactersTyped);
     }
 
     private IEnumerator Timer()
