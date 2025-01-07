@@ -11335,7 +11335,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 957902179117685190}
   typingController: {fileID: 1541650907}
-  idk: 0
 --- !u!82 &6995986397772774469
 AudioSource:
   m_ObjectHideFlags: 0
