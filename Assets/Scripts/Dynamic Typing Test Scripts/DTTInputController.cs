@@ -8,6 +8,7 @@ public class DTTInputController : MonoBehaviour
 {
     [SerializeField] private string[] possibleWords;
 
+    [SerializeField] private DTTUIController UIController;
     [SerializeField] private SceneManagement sceneManagement;
     [SerializeField] private Animator catAnimator;
 
@@ -22,17 +23,15 @@ public class DTTInputController : MonoBehaviour
     private bool timerIsGoing;
 
     [Header("UI")]
-    [SerializeField] private GameObject WordBox;
     [SerializeField] private Text upcomingWordDisplay;
     [SerializeField] private Text wordDisplay;
     [SerializeField] private Text typedDisplay;
 
     private void Start()
     {
-        wordDisplay.text = "start typing to make the cat run";
-        catAnimator.SetBool("IsMoving", true);
-        GenerateUpcomingText();
-        StartCoroutine(GetPlayerInput());
+        playerStatsManager = FindFirstObjectByType<PlayerStatsManager>();
+
+        StartTypingTest();
     }
 
     private void Update()
@@ -41,6 +40,20 @@ public class DTTInputController : MonoBehaviour
         {
             sceneManagement.LoadScene("Home");
         }
+    }
+
+    public void StartTypingTest()
+    {
+        // UI
+        wordDisplay.text = "start typing to make the cat run";
+        UIController.StartTest();
+
+        // Animation
+        catAnimator.SetBool("IsMoving", true);
+
+        // Function calling
+        GenerateUpcomingText();
+        StartCoroutine(GetPlayerInput());
     }
 
     private void GenerateUpcomingText()
@@ -68,6 +81,8 @@ public class DTTInputController : MonoBehaviour
 
     private IEnumerator GetPlayerInput()
     {
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.S));
+
         StartCoroutine(Timer());
         while (timerIsGoing)
         {
@@ -76,7 +91,8 @@ public class DTTInputController : MonoBehaviour
                 yield return null;
                 KeyCode value = (KeyCode)c;
                 while (true)
-                {
+                {   
+                    charactersTyped++;
                     yield return new WaitUntil(() => Input.anyKeyDown);
                     if (Input.inputString.ToLower() == c.ToString().ToLower())
                     {
@@ -89,7 +105,7 @@ public class DTTInputController : MonoBehaviour
                         //Debug.Log($"Incorrect letter: Expected {c}");
                     }
 
-                    charactersTyped++;
+                    
                 }
             }
 
@@ -99,10 +115,9 @@ public class DTTInputController : MonoBehaviour
             GenerateUpcomingText();
         }
 
-        // Ending test actions
-        WordBox.SetActive(false);
-        playerStatsManager.SetWordsPerMinute(correctCharactersTyped, seconds/60f);
-        playerStatsManager.SetAccuracy(correctCharactersTyped, charactersTyped);
+        // Ending test actions and initiating UI changes through the playerStatsManager & UIController
+        playerStatsManager.GetDataEndTest(correctCharactersTyped, charactersTyped, seconds / 60f);
+        UIController.EndTest();
     }
 
     private IEnumerator Timer()
@@ -112,6 +127,7 @@ public class DTTInputController : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             secondsLeft--;
+            UIController.SetTimer(secondsLeft);
         }
         timerIsGoing = false;
     }
