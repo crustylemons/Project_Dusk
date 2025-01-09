@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using System.Collections;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -8,8 +10,10 @@ public class DTTInputController : MonoBehaviour
 {
     [SerializeField] private string[] possibleWords;
 
+    [Header("Needed Connections")]
     [SerializeField] private DTTUIController UIController;
     [SerializeField] private SceneManagement sceneManagement;
+    [SerializeField] private TileMapController tileMapController;
     [SerializeField] private Animator catAnimator;
 
     [Header("Statistics")]
@@ -18,7 +22,6 @@ public class DTTInputController : MonoBehaviour
     private int correctCharactersTyped;
     private int charactersTyped;
     [SerializeField] private int seconds = 30;
-    [SerializeField] private int secondsLeft = 30;
 
     private bool timerIsGoing;
 
@@ -31,11 +34,14 @@ public class DTTInputController : MonoBehaviour
     {
         playerStatsManager = FindFirstObjectByType<PlayerStatsManager>();
 
-        StartTypingTest();
+        // Animation
+        catAnimator.SetBool("isMoving", false);
+        tileMapController.SetCatIsRunning(false);
     }
 
     private void Update()
     {
+        // Go back home
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             sceneManagement.LoadScene("Home");
@@ -46,10 +52,10 @@ public class DTTInputController : MonoBehaviour
     {
         // UI
         wordDisplay.text = "start typing to make the cat run";
-        UIController.StartTest();
 
         // Animation
         catAnimator.SetBool("IsMoving", true);
+        tileMapController.SetCatIsRunning(true);
 
         // Function calling
         GenerateUpcomingText();
@@ -58,12 +64,24 @@ public class DTTInputController : MonoBehaviour
 
     private void GenerateUpcomingText()
     {
-        // Generate a line of text that isn't too long for the text box
+        // Generate a line of text (into a single string) that isn't too long for the text box
         string lineOfWordsDisplay = "";
+        string lastWord = "";
         while (lineOfWordsDisplay.Length < 30)
         {
-            string randomWord = possibleWords[Random.Range(0, possibleWords.Length)] + " ";
-            lineOfWordsDisplay += randomWord;
+            
+            while (true)
+            {
+                string randomWord = possibleWords[Random.Range(0, possibleWords.Length)] + " ";
+
+                // Ensure there isn't two words next to another
+                if (randomWord != lastWord)
+                {
+                    lineOfWordsDisplay += randomWord;
+                    lastWord = randomWord;
+                    break;
+                }
+            }
         }
 
         // Apply the line of text to the appropriate display
@@ -81,16 +99,23 @@ public class DTTInputController : MonoBehaviour
 
     private IEnumerator GetPlayerInput()
     {
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.S));
+        int countdown = 3;
+        while (countdown > 0)
+        {
+            StartCoroutine(Timer(countdown));
+            yield return new WaitForSeconds(1);
+            countdown--;
+        }
 
-        StartCoroutine(Timer());
+        StartCoroutine(Timer(seconds));
         while (timerIsGoing)
         {
+            // Each line of words (each a single string)
             foreach (char c in wordDisplay.text)
             {
                 yield return null;
                 KeyCode value = (KeyCode)c;
-                while (true)
+                while (timerIsGoing)
                 {   
                     charactersTyped++;
                     yield return new WaitUntil(() => Input.anyKeyDown);
@@ -100,12 +125,6 @@ public class DTTInputController : MonoBehaviour
                         correctCharactersTyped++;
                         break; // Exit the loop and proceed to the next character
                     }
-                    else
-                    {
-                        //Debug.Log($"Incorrect letter: Expected {c}");
-                    }
-
-                    
                 }
             }
 
@@ -115,14 +134,29 @@ public class DTTInputController : MonoBehaviour
             GenerateUpcomingText();
         }
 
-        // Ending test actions and initiating UI changes through the playerStatsManager & UIController
-        playerStatsManager.GetDataEndTest(correctCharactersTyped, charactersTyped, seconds / 60f);
-        UIController.EndTest();
+        // End Input intake
+        EndTestActions();
     }
 
-    private IEnumerator Timer()
+    private void EndTestActions()
+    {
+        // Give Data
+        playerStatsManager.GetDataEndTest(correctCharactersTyped, charactersTyped, seconds / 60f);
+        
+        // UI
+        UIController.EndTest();
+
+        // Animation
+        tileMapController.SetCatIsRunning(false);
+        catAnimator.SetBool("isMoving", false);
+    }
+
+    private IEnumerator Timer(int seconds)
     {
         timerIsGoing = true;
+        int secondsLeft = seconds;
+        UIController.SetTimer(secondsLeft);
+
         for (int i = seconds; i > 0; i--)
         {
             yield return new WaitForSeconds(1);

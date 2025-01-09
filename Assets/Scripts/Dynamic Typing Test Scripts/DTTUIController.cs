@@ -27,6 +27,7 @@ public class DTTUIController : MonoBehaviour
     private void Awake()
     {
         blackTransition.SetActive(true);
+        InitializeTestQuestions();
     }
 
     public void SetWPM(int wpm)
@@ -48,15 +49,25 @@ public class DTTUIController : MonoBehaviour
 
     public void InitializeTestQuestions()
     {
+        // Inactive
+        wordBox.SetActive(false);
+        endingBox.SetActive(false);
+        timer.SetActive(false);
 
+        // Active
+        beginningBox.SetActive(true);
     }
 
     public void StartTest()
     {
+        // Inactive
+        beginningBox.SetActive(false);
+        endingBox.SetActive(false);
+
+        // Active
         wordBox.SetActive(true);
         timer.SetActive(true);
 
-        endingBox.SetActive(false);
     }
 
     public void EndTest()

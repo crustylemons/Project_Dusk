@@ -17,7 +17,6 @@ public class HoverableObject : MonoBehaviour
     {
         if (cursorManager.GetCursorVisibility())
         {
-            Debug.Log("Mouse entered " + gameObject.name);
             cursorManager.ChangeCursor(cursorTexture);
         }
     }
@@ -34,6 +33,7 @@ public class HoverableObject : MonoBehaviour
     {
         if (cursorManager.GetCursorVisibility())
         {
+            Debug.Log("mouse was pressed");
             cutsceneController.StartCutscene(cutscene.GetName());
         }
     }

@@ -50,7 +50,7 @@ public class CutsceneController : MonoBehaviour
     {
         foreach (Cutscene c in cutscenes)
         {
-            if (c.GetHasPlayed() == false && c.GetName() == name)
+            if (c.GetHasPlayed() == false && c.GetName() == name || c.GetCanPlayMultiple() && c.GetName() == name)
             {
                 c.gameObject.GetComponent<PlayableDirector>().Play();
                 break;
@@ -62,7 +62,7 @@ public class CutsceneController : MonoBehaviour
     {
         foreach (Cutscene c in cutscenes)
         {
-            if (c.GetHasPlayed() == false)
+            if (c.GetHasPlayed() == false || c.GetCanPlayMultiple())
             {
                 return c;
             }
