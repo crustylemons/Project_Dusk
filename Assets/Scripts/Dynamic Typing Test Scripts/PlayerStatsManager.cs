@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    [SerializeField] private DTTUIController UIController;
-
     [Header("Statistics")]
     [SerializeField] private float wordsPerMinute;
-    [SerializeField] private float currentSpeed;
     [SerializeField] private float accuracy;
 
     private void Awake()
@@ -23,30 +20,19 @@ public class PlayerStatsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public int GetAccuracy() { return Mathf.RoundToInt(accuracy); }
 
-    public float GetAccuracy() { return accuracy; }
-
-    public float GetSpeed() { return currentSpeed; }
-
-    public float GetWordsPerMinute() { return wordsPerMinute; }
+    public int GetWordsPerMinute() { return Mathf.RoundToInt(wordsPerMinute); }
 
     public void SetWordsPerMinute(int correctCharactersTyped, float minutes)
     {
-        // Calculating
         int keyStokesPerMinute = correctCharactersTyped / 5;
-        wordsPerMinute = Mathf.Clamp(keyStokesPerMinute / minutes, 0.0001f, 1000f);
-
-        // Displaying
-        UIController.SetWPM(Mathf.RoundToInt(wordsPerMinute));
+        wordsPerMinute = Mathf.RoundToInt(Mathf.Clamp(keyStokesPerMinute / minutes, 0.0001f, 1000f));
     }
 
     public void SetAccuracy(float correctKeysPressed, float totalKeysPressed)
     {
-        // Calculating
         accuracy = (correctKeysPressed / totalKeysPressed) * 100;
-
-        // Displaying
-        UIController.SetAccuracy(Mathf.RoundToInt(accuracy));
     }
 
     /// <summary>

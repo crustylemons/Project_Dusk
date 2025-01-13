@@ -7,6 +7,7 @@ public class DTTUIController : MonoBehaviour
 {
     [Header("Before Test UI")]
     [SerializeField] private GameObject beginningBox;
+    [SerializeField] private List<Button> buttonList;
 
     [Header("While Typing UI")]
     [SerializeField] private GameObject wordBox;
@@ -23,11 +24,16 @@ public class DTTUIController : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private GameObject blackTransition;
+    [SerializeField] private PlayerStatsManager playerStatsManager;
+
+    private string gameMode;
 
     private void Awake()
     {
         blackTransition.SetActive(true);
         InitializeTestQuestions();
+
+        playerStatsManager = FindFirstObjectByType<PlayerStatsManager>();
     }
 
     public void SetWPM(int wpm)
@@ -67,14 +73,25 @@ public class DTTUIController : MonoBehaviour
         // Active
         wordBox.SetActive(true);
         timer.SetActive(true);
-
     }
 
     public void EndTest()
     {
+        // Set values of stats in the UI
+        SetWPM(playerStatsManager.GetWordsPerMinute());
+        SetAccuracy(playerStatsManager.GetAccuracy());
+
+        // UI enabling/disabling
         wordBox.SetActive(false);
         timer.SetActive(false);
 
         endingBox.SetActive(true);
+    }
+    
+    public string GetGameMode() { return gameMode; }
+
+    public void SetChosenGameMode(string gm)
+    {
+        gameMode = gm.ToLower();
     }
 }
