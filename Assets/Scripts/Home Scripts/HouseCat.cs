@@ -1,31 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HouseCat : MonoBehaviour
 {
+    //[SerializeField] private NavMeshAgent agent;
+
     // Variables for smooth walking
     private float smoothTime = 0.3f;
     private Vector2 velocity = Vector3.zero;
 
     private bool isMovingToOption = false;
 
-    [SerializeField] Animator catAnimator;
-    [SerializeField] HousePosition targetPos;
+    [SerializeField] private Animator catAnimator;
+    [SerializeField] private Vector3 targetTrans;
 
-    [SerializeField] HousePosition[] positions;
+    [SerializeField] private HousePosition[] positions;
+    [SerializeField] private HousePosition targetPos;
+
+    [SerializeField] private NavMeshAgent agent;
+
+    private void Start()
+    {
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
 
     private void Update()
     {
+        SetAgentPosition(targetPos);
+
         // Verify that the cat is currently moving
         if (isMovingToOption)
         {
-            catAnimator.SetBool("isMoving", true);
+            catAnimator.SetBool("IsMoving", true);
             
-            if (gameObject.transform.position != targetPos.transform.position)
+            if (gameObject.transform.position != targetTrans)
             {
                 // Creates smooth transition with cat movement
-                gameObject.transform.position = Vector2.SmoothDamp(gameObject.transform.position, targetPos.transform.position, ref velocity, smoothTime);
+                
             }
             else
             {
@@ -34,13 +49,15 @@ public class HouseCat : MonoBehaviour
         }
         else
         {
-            catAnimator.SetBool("isMoving", false);
+            catAnimator.SetBool("IsMoving", false);
         }
     }
 
-    public void MoveToOption(HousePosition position)
+    public void SetAgentPosition(HousePosition position)
     {
         targetPos = position;
-        isMovingToOption = true;
+        Vector3 pos = position.GetPosition();
+        agent.SetDestination(new Vector3(pos.x, pos.y, 0));
+        targetTrans = pos;
     }
 }

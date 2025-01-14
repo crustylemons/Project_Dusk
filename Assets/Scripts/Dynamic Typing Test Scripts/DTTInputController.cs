@@ -8,9 +8,11 @@ using UnityEngine.UI;
 
 public class DTTInputController : MonoBehaviour
 {
+    [Header("Word Pools")]
     [SerializeField] private string[] possibleNormalWords;
     [SerializeField] private string[] possibleLeftHandWords;
     [SerializeField] private string[] possibleRightHandWords;
+    private string[] chosenPossibleWords;
 
     [Header("Needed Connections")]
     [SerializeField] private DTTUIController UIController;
@@ -45,42 +47,45 @@ public class DTTInputController : MonoBehaviour
         // Go back home
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            sceneManagement.LoadScene("Home");
+            UIController.ToggleOptions();
         }
     }
 
     public void StartTypingTest()
     {
-        // UI
-        wordDisplay.text = "start typing to make the cat run";
-
         // Animation
         catAnimator.SetBool("IsMoving", true);
         tileMapController.SetCatIsRunning(true);
 
         // Function calling
-        GenerateUpcomingText();
+        chosenPossibleWords = FindPoolOfWords();
+        GenerateUpcomingText(chosenPossibleWords);
         StartCoroutine(GetPlayerInput());
     }
 
-    private void GenerateUpcomingText()
+    // Find pool of words based on player's chosen game mode
+    private string[] FindPoolOfWords()
     {
-        // Find the right pool of words
-        string[] wordPool;
-        switch(UIController.GetGameMode())
+        switch (UIController.GetGameMode())
         {
             case "left hand":
-                wordPool = possibleLeftHandWords;
                 Debug.Log("left hand chosen");
-                break;
+                return possibleLeftHandWords;
             case "right hand":
-                wordPool = possibleRightHandWords;
                 Debug.Log("right hand chosen");
-                break;
+                return possibleRightHandWords;
             default:
-                wordPool = possibleNormalWords;
                 Debug.Log("normal chosen");
-                break;
+                return possibleNormalWords;
+        }
+    }
+
+    private void GenerateUpcomingText(string[] wordPool)
+    {
+        if (wordPool == null || wordPool.Length < 2)
+        {
+            Debug.Log("Word pool is not the correct length or is null");
+            return;
         }
 
         // Generate a line of text (into a single string) that isn't too long for the text box
@@ -108,7 +113,7 @@ public class DTTInputController : MonoBehaviour
         {
             wordDisplay.text = upcomingWordDisplay.text;
             upcomingWordDisplay.text = "";
-            GenerateUpcomingText();
+            GenerateUpcomingText(chosenPossibleWords);
         }
         else
         {
@@ -152,7 +157,7 @@ public class DTTInputController : MonoBehaviour
             // Reset for the next word
             typedDisplay.text = "";
             wordDisplay.text = "";
-            GenerateUpcomingText();
+            GenerateUpcomingText(chosenPossibleWords);
         }
 
         // End Input intake
@@ -176,8 +181,8 @@ public class DTTInputController : MonoBehaviour
         UIController.EndTest();
 
         // Animation
+        catAnimator.SetBool("IsMoving", false);
         tileMapController.SetCatIsRunning(false);
-        catAnimator.SetBool("isMoving", false);
     }
 
     private IEnumerator Timer(int seconds)

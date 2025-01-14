@@ -8,4 +8,6 @@ public class HousePosition : MonoBehaviour
     [SerializeField] private string animationBoolName;
 
     public string GetAnimationBoolName() {  return animationBoolName; }
+
+    public Vector3 GetPosition() { return transform.position; }
 }

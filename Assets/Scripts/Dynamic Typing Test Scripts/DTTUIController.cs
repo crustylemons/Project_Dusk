@@ -25,6 +25,7 @@ public class DTTUIController : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject blackTransition;
     [SerializeField] private PlayerStatsManager playerStatsManager;
+    [SerializeField] private GameObject options;
 
     private string gameMode;
 
@@ -93,5 +94,17 @@ public class DTTUIController : MonoBehaviour
     public void SetChosenGameMode(string gm)
     {
         gameMode = gm.ToLower();
+    }
+    
+    public void ToggleOptions()
+    {
+        if (options.activeSelf == true)
+        {
+            options.SetActive(false);
+        }
+        else
+        {
+            options.SetActive(true);
+        }
     }
 }
