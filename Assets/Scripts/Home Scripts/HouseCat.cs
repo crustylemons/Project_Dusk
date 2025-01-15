@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class HouseCat : MonoBehaviour
 {
-    //[SerializeField] private NavMeshAgent agent;
 
-    // Variables for smooth walking
-    private float smoothTime = 0.3f;
-    private Vector2 velocity = Vector3.zero;
-
-    private bool isMovingToOption = false;
-
-    [SerializeField] private Animator catAnimator;
+    [SerializeField] private Animator animator;
     [SerializeField] private Vector3 targetTrans;
 
     [SerializeField] private HousePosition[] positions;
@@ -30,26 +24,30 @@ public class HouseCat : MonoBehaviour
 
     private void Update()
     {
+        Animate();
         SetAgentPosition(targetPos);
+    }
 
-        // Verify that the cat is currently moving
-        if (isMovingToOption)
+    private void Animate()
+    {
+        if (Vector3.Distance(gameObject.transform.position, targetTrans) > 0.1f)
         {
-            catAnimator.SetBool("IsMoving", true);
-            
-            if (gameObject.transform.position != targetTrans)
-            {
-                // Creates smooth transition with cat movement
-                
-            }
-            else
-            {
-                catAnimator.SetBool(targetPos.GetAnimationBoolName(), true);
-            }
+            animator.SetBool("IsWalking", true);
         }
         else
         {
-            catAnimator.SetBool("IsMoving", false);
+            animator.SetBool("IsWalking", false);
+            animator.SetBool(targetPos.GetAnimationBoolName(), true);
+
+        }
+
+        if (targetTrans.x < gameObject.transform.position.x)
+        {
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        }
+        else
+        {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }
 
