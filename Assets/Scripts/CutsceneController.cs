@@ -5,17 +5,12 @@ using UnityEngine.Timeline;
 
 public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] private Cat cat;
     [SerializeField] private Animator catAnimator;
 
     [SerializeField] private DialogueController dialogueController;
 
     [SerializeField] private Cutscene[] cutscenes;
     
-    private void Start()
-    {
-        cat = FindFirstObjectByType<Cat>();
-    }
 
     private IEnumerator WaitForDialogue()
     {
@@ -28,7 +23,7 @@ public class CutsceneController : MonoBehaviour
         // Initiates dialogue
         dialogueController.PrintDialogue(cutscenes[0].GetDialogue());
         StartCoroutine(WaitForDialogue());
-        catAnimator.SetBool("IsSitting", true);
+        //catAnimator.SetBool("IsSitting", true);
     }
 
     public void EndCutscene(string cutsceneName)

@@ -53,6 +53,7 @@ public class DialogueController : MonoBehaviour
 
         // Make dialogue box inactive and let process know it's done printing
         isPrintingDialogue = false;
+        dialogueBox.gameObject.SetActive(false);
         spaceToContinue.gameObject.SetActive(false);
         dialogueText.gameObject.SetActive(false);
     }

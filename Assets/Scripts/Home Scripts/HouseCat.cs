@@ -3,34 +3,72 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class HouseCat : MonoBehaviour
 {
 
+    [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
-    [SerializeField] private Vector3 targetTrans;
 
     [SerializeField] private HousePosition[] positions;
     [SerializeField] private HousePosition targetPos;
+    [SerializeField] private Vector3 targetTrans;
 
-    [SerializeField] private NavMeshAgent agent;
+    private HousePosition previousPos;
+
 
     private void Start()
     {
+        // NavMesh Pro
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
 
-    private void Update()
+    public void StartPositionControl()
     {
-        Animate();
-        SetAgentPosition(targetPos);
+        StartCoroutine(PositionControl());
     }
 
-    private void Animate()
+    private IEnumerator PositionControl()
     {
-        if (Vector3.Distance(gameObject.transform.position, targetTrans) > 0.1f)
+        while (true)
+        {
+            // If gameobject is at the position
+            if (Vector3.Distance(transform.position, targetTrans) < 0.1f && targetPos != null)
+            {
+                Animate(true);
+
+                // stay in position for random amound of time
+                int rnd = Random.Range(30, 45);
+                print(rnd + " amount of seconds before new position");
+                yield return new WaitForSeconds(rnd);
+
+                // Set new targetPos
+                ChooseNewPosition();
+
+                Debug.Log("Going to new position");
+            }
+            // If gameobject is not at the position
+            else
+            {
+                Animate(false);
+            }
+
+
+            SetAgentPosition(targetPos);
+            yield return null;
+        }
+    }
+
+    private void Animate(bool isAtPosition)
+    {
+        if (previousPos != null)
+        {
+            animator.SetBool(previousPos.GetAnimationBoolName(), false);
+        }
+
+        // Animation bool control
+        if (!isAtPosition)
         {
             animator.SetBool("IsWalking", true);
         }
@@ -41,6 +79,8 @@ public class HouseCat : MonoBehaviour
 
         }
 
+
+        // Sprite rotation control
         if (targetTrans.x < gameObject.transform.position.x)
         {
             transform.rotation = new Quaternion(0, 180, 0, 0);
@@ -51,7 +91,32 @@ public class HouseCat : MonoBehaviour
         }
     }
 
-    public void SetAgentPosition(HousePosition position)
+    // Sets the targetPos by random
+    private void ChooseNewPosition()
+    {
+        // Return if there is one or less value in the array
+        if (positions.Length < 2)
+        {
+            Debug.Log("There are one or less positions");
+            return;
+        }
+        
+        while (true)
+        {
+            // Choose random position
+            HousePosition chosenPos = positions[Random.Range(0, positions.Length)];
+
+            // Verify value isn't previous value
+            if (chosenPos != targetPos)
+            {
+                previousPos = targetPos;
+                targetPos = chosenPos;
+                break;
+            }
+        }
+    }
+
+    private void SetAgentPosition(HousePosition position)
     {
         targetPos = position;
         Vector3 pos = position.GetPosition();
