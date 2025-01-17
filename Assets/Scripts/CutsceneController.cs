@@ -28,7 +28,7 @@ public class CutsceneController : MonoBehaviour
 
     public void EndCutscene(string cutsceneName)
     {
-        catAnimator.SetBool("IsSitting", false);
+        //catAnimator.SetBool("IsSitting", false);
         cutscenes[0].gameObject.GetComponent<PlayableDirector>().Stop();
 
         // Iterature through cutscenes to set the correct one's bool "hasPlayed" to true

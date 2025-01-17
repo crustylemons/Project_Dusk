@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: dfb051d975c841f42958e653e7544195, type: 2}
+    - {fileID: 11400000, guid: ac28bffe57614b047b0c0c614428eeda, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -589,6 +590,80 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 892453885}
+          m_TargetAssemblyTypeName: CutsceneController, Assembly-CSharp
+          m_MethodName: EndCutscene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: IntroCutscene
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1541650907}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1541650907}
+          m_TargetAssemblyTypeName: TypingInputController, Assembly-CSharp
+          m_MethodName: StartPathCoroutine
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1479778630}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 945036753}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1589833137}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!114 &80163610
 MonoBehaviour:
@@ -607,6 +682,7 @@ MonoBehaviour:
   - Meow meow meow (It's lovely to meet you)
   cutsceneName: IntroCutscene
   hasPlayed: 0
+  canPlayMultipleTimes: 0
 --- !u!1 &96354496
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCursorVisible: 0
-  defaultCursorTexture: {fileID: 0}
+  defaultCursorTexture: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
 --- !u!1 &97910612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,6 +1788,7 @@ MonoBehaviour:
   dialogue: []
   cutsceneName: IntoHouseCutscene
   hasPlayed: 0
+  canPlayMultipleTimes: 0
 --- !u!1 &641172920
 GameObject:
   m_ObjectHideFlags: 0
@@ -8078,7 +8155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a2b90a0264aa248809fa565bb89024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cat: {fileID: 6995986397772774468}
   catAnimator: {fileID: 957902179117685190}
   dialogueController: {fileID: 964132262}
   cutscenes:
@@ -10464,7 +10540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1961712797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10517,7 +10593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is my example dialogue
+  m_Text: 
 --- !u!222 &1961712799
 CanvasRenderer:
   m_ObjectHideFlags: 0
