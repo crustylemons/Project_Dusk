@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TileMapController : MonoBehaviour
 {
@@ -45,6 +46,25 @@ public class TileMapController : MonoBehaviour
             // Reset positions if the cat has stopped moving
             longGrassRbOne.gameObject.transform.position = new Vector2(0, 0);
             longGrassRbTwo.gameObject.transform.position = new Vector2(16, 0);
+        }
+    }
+
+    private void UpdateTileMap(Tilemap tilemap)
+    {
+
+        BoundsInt bounds = tilemap.cellBounds;
+        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
+
+        for (int x = 0; x < bounds.size.x; x++)
+        {
+            for (int y = 0; y < bounds.size.y; y++)
+            {
+                TileBase tile = allTiles[x + y * bounds.size.x];
+                if (tile != null)
+                {
+                    Debug.Log($"{tile.name} has the sprite ?");
+                }
+            }
         }
     }
 
