@@ -16,12 +16,13 @@ public class DTTInputController : MonoBehaviour
 
     [Header("Needed Connections")]
     [SerializeField] private DTTUIController UIController;
+    [SerializeField] private DTTAudioController audioController;
     [SerializeField] private SceneManagement sceneManagement;
     [SerializeField] private TileMapController tileMapController;
     [SerializeField] private Animator catAnimator;
 
     [Header("Statistics")]
-    [SerializeField] private PlayerStatsManager playerStatsManager;
+    private PlayerStatsManager playerStatsManager;
     private int correctCharactersTyped;
     private int charactersTyped;
     [SerializeField] private int seconds = 30;
@@ -47,7 +48,7 @@ public class DTTInputController : MonoBehaviour
         // Go back home
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UIController.ToggleOptions();
+            UIController.ToggleEsc();
         }
     }
 
@@ -60,13 +61,14 @@ public class DTTInputController : MonoBehaviour
         // Function calling
         chosenPossibleWords = FindPoolOfWords();
         GenerateUpcomingText(chosenPossibleWords);
+        UIController.StartTypingTest();
         StartCoroutine(GetPlayerInput());
     }
 
     // Find pool of words based on player's chosen game mode
     private string[] FindPoolOfWords()
     {
-        switch (UIController.GetGameMode())
+        switch (UIController.GetTypingTestHandMode())
         {
             case "left hand":
                 Debug.Log("left hand chosen");
@@ -151,6 +153,10 @@ public class DTTInputController : MonoBehaviour
                         correctCharactersTyped++;
                         break; // Exit the loop and proceed to the next character
                     }
+                    else
+                    {
+                        audioController.PlayDenied();
+                    }
                 }
             }
 
@@ -178,7 +184,7 @@ public class DTTInputController : MonoBehaviour
         playerStatsManager.GetDataEndTest(correctCharactersTyped, charactersTyped, seconds / 60f);
         
         // UI
-        UIController.EndTest();
+        UIController.EndTypingTest();
 
         // Animation
         catAnimator.SetBool("IsMoving", false);
