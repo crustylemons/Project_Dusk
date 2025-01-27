@@ -608,8 +608,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.52655, y: -1.0152, z: 0}
-    m_Extent: {x: 1.73735, y: 2.1671, z: 0}
+    m_Center: {x: -0.5352, y: -1.0112, z: 0}
+    m_Extent: {x: 1.7385, y: 2.1698, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -893,7 +893,6 @@ GameObject:
   - component: {fileID: 658702532}
   - component: {fileID: 658702533}
   - component: {fileID: 658702534}
-  - component: {fileID: 658702535}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -918,7 +917,7 @@ Camera:
   m_GameObject: {fileID: 658702528}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.38823533, g: 0.5019608, b: 0.4039216, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1058,28 +1057,6 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
---- !u!95 &658702535
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658702528}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &741845222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,8 +3671,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.4974, y: -1.0764, z: 0}
-    m_Extent: {x: 1.7774999, y: 2.2131, z: 0}
+    m_Center: {x: -0.49575007, y: -1.0769, z: 0}
+    m_Extent: {x: 1.77065, y: 2.2118, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3959,8 +3936,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.45885003, y: -0.9632, z: 0}
-    m_Extent: {x: 1.67075, y: 2.1539001, z: 0}
+    m_Center: {x: -0.47035003, y: -0.95705, z: 0}
+    m_Extent: {x: 1.66645, y: 2.14745, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6725,7 +6702,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.05
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

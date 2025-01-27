@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DTTUIController : MonoBehaviour
+public class GameUIController : MonoBehaviour
 {
     [Header("Before Playing UI")]
     [SerializeField] private GameObject beginningBox;
@@ -34,7 +34,7 @@ public class DTTUIController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip escOpen;
     [SerializeField] private AudioClip escClose;
-    private PlayerStatsManager playerStatsManager;
+    private TypingTestStatsManager playerStatsManager;
 
 
     private void Awake()
@@ -42,7 +42,7 @@ public class DTTUIController : MonoBehaviour
         blackTransition.SetActive(true);
         InitializePlayChoice();
 
-        playerStatsManager = FindFirstObjectByType<PlayerStatsManager>();
+        playerStatsManager = FindFirstObjectByType<TypingTestStatsManager>();
     }
 
     public void SetWPM(int wpm)
@@ -119,15 +119,13 @@ public class DTTUIController : MonoBehaviour
         timer.SetActive(false);
 
         endingBox.SetActive(true);
+        grayOut.SetActive(true);
+        bushes.SetActive(true);
     }
     
     public string GetTypingTestHandMode() { return handMode; }
 
-
-    /// <summary>
-    /// Sets the chosen hand mode to be used in the typing test
-    /// </summary>
-    /// <param name="hand">what hand is being used to type</param>
+    // Sets the chosen hand mode to be used in the typing test
     public void SetChosenHandMode(string hand)
     {
         handMode = hand.ToLower();

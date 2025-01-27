@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -30,7 +29,6 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log(gameObject.name + " was clicked");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             AudioSource.PlayOneShot(pressedSound);

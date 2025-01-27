@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -23,12 +22,11 @@ public class CutsceneController : MonoBehaviour
         // Initiates dialogue
         dialogueController.PrintDialogue(cutscenes[0].GetDialogue());
         StartCoroutine(WaitForDialogue());
-        //catAnimator.SetBool("IsSitting", true);
     }
 
     public void EndCutscene(string cutsceneName)
     {
-        //catAnimator.SetBool("IsSitting", false);
+        // Stop cutscene
         cutscenes[0].gameObject.GetComponent<PlayableDirector>().Stop();
 
         // Iterature through cutscenes to set the correct one's bool "hasPlayed" to true
@@ -43,6 +41,7 @@ public class CutsceneController : MonoBehaviour
 
     public void StartCutscene(string name)
     {
+        // Iterate through given cutscenes
         foreach (Cutscene c in cutscenes)
         {
             if (c.GetHasPlayed() == false && c.GetName() == name || c.GetCanPlayMultiple() && c.GetName() == name)

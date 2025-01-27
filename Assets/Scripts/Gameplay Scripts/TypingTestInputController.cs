@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class DTTInputController : MonoBehaviour
+public class TypingTestInputController : MonoBehaviour
 {
     [Header("Word Pools")]
     [SerializeField] private string[] possibleNormalWords;
@@ -15,14 +15,14 @@ public class DTTInputController : MonoBehaviour
     private string[] chosenPossibleWords;
 
     [Header("Needed Connections")]
-    [SerializeField] private DTTUIController UIController;
-    [SerializeField] private DTTAudioController audioController;
+    [SerializeField] private GameUIController UIController;
+    [SerializeField] private GameAudioController audioController;
     [SerializeField] private SceneManagement sceneManagement;
     [SerializeField] private TileMapController tileMapController;
     [SerializeField] private Animator catAnimator;
 
     [Header("Statistics")]
-    private PlayerStatsManager playerStatsManager;
+    private TypingTestStatsManager playerStatsManager;
     private int correctCharactersTyped;
     private int charactersTyped;
     [SerializeField] private int seconds = 30;
@@ -36,7 +36,7 @@ public class DTTInputController : MonoBehaviour
 
     private void Start()
     {
-        playerStatsManager = FindFirstObjectByType<PlayerStatsManager>();
+        playerStatsManager = FindFirstObjectByType<TypingTestStatsManager>();
 
         // Animation
         catAnimator.SetBool("IsMoving", false);
@@ -54,13 +54,22 @@ public class DTTInputController : MonoBehaviour
 
     public void StartTypingTest()
     {
+        StartCoroutine(TypingTestActions());
+
+        chosenPossibleWords = FindPoolOfWords();
+        GenerateUpcomingText(chosenPossibleWords);
+    }
+
+    public IEnumerator TypingTestActions()
+    {
+        // Delay
+        yield return new WaitForSeconds(0);
+
         // Animation
         catAnimator.SetBool("IsMoving", true);
         tileMapController.SetCatIsRunning(true);
 
         // Function calling
-        chosenPossibleWords = FindPoolOfWords();
-        GenerateUpcomingText(chosenPossibleWords);
         UIController.StartTypingTest();
         StartCoroutine(GetPlayerInput());
     }
@@ -126,14 +135,11 @@ public class DTTInputController : MonoBehaviour
     private IEnumerator GetPlayerInput()
     {
         StartTestActions();
+        
+        audioController.StartCountDown();
 
-        int countdown = 3;
-        while (countdown > 0)
-        {
-            StartCoroutine(Timer(countdown));
-            yield return new WaitForSeconds(1);
-            countdown--;
-        }
+        yield return StartCoroutine(Timer(3));
+        
 
         StartCoroutine(Timer(seconds));
         while (timerIsGoing)
@@ -153,7 +159,7 @@ public class DTTInputController : MonoBehaviour
                         correctCharactersTyped++;
                         break; // Exit the loop and proceed to the next character
                     }
-                    else
+                    else if (!Input.GetKeyUp(KeyCode.Escape))
                     {
                         audioController.PlayDenied();
                     }

@@ -46,6 +46,7 @@ public class DialogueController : MonoBehaviour
             {
                 spaceToContinue.gameObject.SetActive(true);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                yield return null;
             }
             skipToFullText = false;
             spaceToContinue.gameObject.SetActive(false);
@@ -70,6 +71,7 @@ public class DialogueController : MonoBehaviour
                 dialogueText.text = givenDialogue;
                 spaceToContinue.gameObject.SetActive(true);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                yield return null;
                 break;
             }
             dialogueText.text = currentPrint += c;

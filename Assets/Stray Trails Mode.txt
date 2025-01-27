@@ -1,0 +1,57 @@
+Stray Trails Mode :
+
+
+What keeps the player engaged? (gameplay)
+
+The whole point of playing this mode is to rack up points. How you get those points is through not hitting objects, progressing, and pressing keys when given the opportunity. In the lesser difficulty, there will be only letters that will pop up, but in the higher difficulty, there will be words. With every letter / word pressed, you will unlock a portion of an item that shows up within the home; with some items being rarer.
+
+
+What are the items? 
+
+While I'm not sure of all of them currently, I'm thinking a majority of it will consist of furniture for the home.
+Some specific ideas consist of :
+-couch
+-side table
+-cat nail post
+-cat bed
+-yard mountain
+-plants
+
+
+How will you keep track of what items the player collected and how will they know?
+
+I'm going to have a "don't destroy" object and hopefully a save file that will keep the data as well. Also, while in the game, you'll be able to hover over objects around the house that are grayed out, and it will pop up some UI that will show you x/y amount that was collected by the player. Being able to visually see their progress should help motivate the player a lot.
+
+
+When is the timeline for completing this?
+
+I have two weeks (with some luck, three) to complete the entire project, including bugs. So, my hope is to get the gameplay working by the end of this week (1/31/25). If I don't it will get a little tense and rushed. This is really important for me to complete, however, because it will 100% make my game worth playing -- you can often type anywhere you'd like, but Stray Trails mode isn't seen everywhere. It also gives light and context into the title of this game, that would otherwise not truly connect with the actual gameplay at all. 
+
+
+How will the logic be managed? (script development)
+
+I already have a function tied to the UI controller that will set everything up as soon as the "Stray Trails" button is pressed. I'd like to not have everything tied into what is now called, "DTTInputController" and create a new script called, "StrayTrailsInputController" and then rename the former. I also need another script that will be created upon first entering the home that holds/saves the data of what is collected. There also needs to be links to the audio, UI, and tileMap controllers.
+There needs to be two generators, one for the obstacles, and one for the items along the side that you need to type a letter for (leave room for difficulty in case there's time).
+
+Overall the new scripts should be :
+-StrayTrailsInputController
+	-monitors if the player has moved up and down to avoid obstacles
+	-monitors if the player has typed the correct letter/word to the objects in the tall grass
+	-controls actions done before and after game
+	-controls what input is needed for each object
+-SaveDataManager
+	-holds onto the number of each object collected
+	-[if there's time] holds onto how many times the player has done both modes
+-StrayTrailsObstacleGenerator
+	-controls when and how many obstacles are created
+	-destroys obstacles when they leave the sight of the player
+	-controls where on the three areas the obstacles will be generated
+	-(will need a link to "TypingTestStatsManager")
+-StrayTrailsItemGenerator
+	-controls the rarity of each item generation
+	-controls where in the long grass the items will be put
+	-(will need a link to "TypingTestStatsManager")
+-Item
+	-Contains data about the individual item
+		-percent complete
+		-how many collected

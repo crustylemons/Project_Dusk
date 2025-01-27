@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatsManager : MonoBehaviour
+public class TypingTestStatsManager : MonoBehaviour
 {
     [Header("Statistics")]
     [SerializeField] private float wordsPerMinute;
