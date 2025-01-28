@@ -8,6 +8,8 @@ public class StrayTrailsItemGenerator : MonoBehaviour
     [SerializeField] private Item[] currentItems;
     [SerializeField] private Vector2[] spawnPoints;
 
+    [SerializeField] private StrayTrailsInputController inputController;
+
 
     // Start is called before the first frame update
     void Start()

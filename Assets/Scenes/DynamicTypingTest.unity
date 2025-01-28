@@ -470,7 +470,6 @@ GameObject:
   - component: {fileID: 56090710}
   - component: {fileID: 56090713}
   - component: {fileID: 56090712}
-  - component: {fileID: 56090711}
   m_Layer: 0
   m_Name: Long Grass 2
   m_TagString: Untagged
@@ -493,33 +492,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1568592823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &56090711
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56090709}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 2
 --- !u!483693784 &56090712
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1922,6 +1894,8 @@ GameObject:
   - component: {fileID: 135023133}
   - component: {fileID: 135023132}
   - component: {fileID: 135023131}
+  - component: {fileID: 135023134}
+  - component: {fileID: 135023135}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -2018,6 +1992,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &135023134
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135023130}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.04880868, y: -0.0037545227}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.390625, y: 0.390625}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.21791747, y: 0.20289934}
+  m_EdgeRadius: 0
+--- !u!114 &135023135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135023130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42712f23fda4d0241ab7090de21d5c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputController: {fileID: 1050135190}
 --- !u!1 &139136286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2230,7 @@ MonoBehaviour:
   buttonList:
   - {fileID: 681659173}
   - {fileID: 1863649973}
+  strayTrailsBeginningBox: {fileID: 2091500470}
   wordBox: {fileID: 285268939}
   typingText:
   - {fileID: 1043170304}
@@ -4909,10 +4943,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac21ddd92143894980a9490747c71b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleObstacles: []
+  inputController: {fileID: 1050135190}
+  tileMapController: {fileID: 1247946366}
+  possibleObstacles:
+  - {fileID: 7252827841694770789, guid: 356a3cbae4ef51e419e58d4409556047, type: 3}
+  - {fileID: 8059092652395409915, guid: fef99cf6ab5f7fd4997de43923effdc5, type: 3}
   currentObstacles: []
-  spawnOne: {x: 0, y: 0}
-  spawnTwo: {x: 0, y: 0}
+  spawnPoints:
+  - {x: 11.5, y: 0.5, z: 0}
+  - {x: 11.5, y: -0.5, z: 0}
+  obstacleDestoryPoint: {x: -8, y: 0, z: 0}
+  maxObstacles: 10
+  timeBetweenInstancesMin: 5
+  timeBetweenInstancesMax: 10
 --- !u!1 &737317070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,7 +4967,6 @@ GameObject:
   - component: {fileID: 737317071}
   - component: {fileID: 737317073}
   - component: {fileID: 737317072}
-  - component: {fileID: 737317074}
   m_Layer: 0
   m_Name: Long Grass 1
   m_TagString: Untagged
@@ -6338,33 +6380,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!50 &737317074
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737317070}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 2
 --- !u!1 &744081730
 GameObject:
   m_ObjectHideFlags: 0
@@ -6829,6 +6844,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863617722}
   m_CullTransparentMesh: 1
+--- !u!1 &921300238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 921300239}
+  - component: {fileID: 921300240}
+  m_Layer: 0
+  m_Name: ST Cat Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &921300239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921300238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1041894041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &921300240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921300238}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42712f23fda4d0241ab7090de21d5c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputController: {fileID: 0}
 --- !u!1 &958637042
 GameObject:
   m_ObjectHideFlags: 0
@@ -7094,6 +7154,7 @@ Transform:
   - {fileID: 736928670}
   - {fileID: 1754207995}
   - {fileID: 1050135189}
+  - {fileID: 921300239}
   m_Father: {fileID: 772850066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1043170304
@@ -7219,6 +7280,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5ea69f7aa8a8040be08bba97d712fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cat: {fileID: 0}
+  tileMapController: {fileID: 1247946366}
+  catController: {fileID: 135023135}
+  UIController: {fileID: 0}
+  positionOne: {x: 0, y: 0, z: 0}
+  positionTwo: {x: 0, y: 0, z: 0}
 --- !u!1 &1050530045
 GameObject:
   m_ObjectHideFlags: 0
@@ -8050,9 +8117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b577da170292b043ac143eb8b239d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  longGrassRbOne: {fileID: 737317074}
-  longGrassRbTwo: {fileID: 56090711}
-  forceAmount: -5
+  longGrassRbOne: {fileID: 737317070}
+  longGrassRbTwo: {fileID: 56090709}
+  tileMapSpeed: 5
   treeSpawnTop: {x: 0, y: 2.5}
   treeSpawnBottom: {x: 0, y: -2.5}
 --- !u!4 &1247946367
@@ -8748,6 +8815,7 @@ MonoBehaviour:
   possibleItems: []
   currentItems: []
   spawnPoints: []
+  inputController: {fileID: 0}
 --- !u!1 &1834838651
 GameObject:
   m_ObjectHideFlags: 0
@@ -9245,37 +9313,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947117485}
   m_CullTransparentMesh: 1
---- !u!1 &1979109064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1979109065}
-  m_Layer: 0
-  m_Name: Tilemap Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1979109065
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979109064}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5448742, y: -0.17022838, z: -0.86633664}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022777105
 GameObject:
   m_ObjectHideFlags: 0
@@ -9812,6 +9849,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 736928671}
+        m_TargetAssemblyTypeName: StrayTrailsObstacleGenerator, Assembly-CSharp
+        m_MethodName: StartSpawning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1050135190}
+        m_TargetAssemblyTypeName: StrayTrailsInputController, Assembly-CSharp
+        m_MethodName: StartStrayTrails
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2091500473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10020,7 +10081,6 @@ SceneRoots:
   - {fileID: 1568592823}
   - {fileID: 307780579}
   - {fileID: 135023133}
-  - {fileID: 1979109065}
   - {fileID: 1872579860}
   - {fileID: 772850066}
   - {fileID: 2134024838}

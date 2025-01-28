@@ -6,10 +6,10 @@ public class TileMapController : MonoBehaviour
 {
 
     [Header("Tile Maps")]
-    [SerializeField] private Rigidbody2D longGrassRbOne;
-    [SerializeField] private Rigidbody2D longGrassRbTwo;
+    [SerializeField] private GameObject longGrassRbOne;
+    [SerializeField] private GameObject longGrassRbTwo;
 
-    [SerializeField] private float forceAmount = -5f;
+    [SerializeField] private float tileMapSpeed = 5.0f;
 
     [Header("Tree Spawning")]
     [SerializeField] private Vector2 treeSpawnTop;
@@ -22,8 +22,8 @@ public class TileMapController : MonoBehaviour
     {
         if (catIsRunning)
         {
-            longGrassRbOne.velocityX = forceAmount;
-            longGrassRbTwo.velocityX = forceAmount;
+            longGrassRbOne.transform.position = Vector2.MoveTowards(longGrassRbOne.transform.position, new Vector2 (-16,0), tileMapSpeed * Time.deltaTime);
+            longGrassRbTwo.transform.position = Vector2.MoveTowards(longGrassRbTwo.transform.position, new Vector2(-16,0), tileMapSpeed * Time.deltaTime);
         }
     }
 
@@ -49,6 +49,7 @@ public class TileMapController : MonoBehaviour
         }
     }
 
+    // Unfinished tile changing
     private void UpdateTileMap(Tilemap tilemap)
     {
 
@@ -72,4 +73,6 @@ public class TileMapController : MonoBehaviour
     {
         catIsRunning = isCatRunning;
     }
+
+    public float GetTileMapSpeed() { return tileMapSpeed; }
 }

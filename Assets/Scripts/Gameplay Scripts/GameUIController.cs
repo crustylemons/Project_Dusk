@@ -14,9 +14,10 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private List<Button> buttonList;
     private string handMode;
 
-    // put before stray trails mode UI elements
+    [Header("Before Stray Trails UI")]
+    [SerializeField] private GameObject strayTrailsBeginningBox;
 
-    [Header("While Typing UI")]
+    [Header("While In Typing Test UI")]
     [SerializeField] private GameObject wordBox;
     [SerializeField] private List<GameObject> typingText;
     [SerializeField] private GameObject timer;
@@ -28,7 +29,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject playAgainBtn;
     [SerializeField] private GameObject continueBtn;
 
-    [Header("Other")]
+    [Header("Other Connections")]
     [SerializeField] private GameObject blackTransition;
     [SerializeField] private GameObject esc;
     [SerializeField] private AudioSource audioSource;
@@ -76,9 +77,23 @@ public class GameUIController : MonoBehaviour
         bushes.SetActive(true);
     }
 
-    public void InitializeStrayTrailsOptions()
+    public void StartStrayTrails()
     {
-        // do stuff
+        // Inactive
+        beginningBox.SetActive(false);
+        endingBox.SetActive(false);
+        grayOut.SetActive(false);
+        bushes.SetActive(false);
+
+
+        // Active
+    }
+
+    public void StopStrayTrails()
+    {
+        endingBox.SetActive(true);
+        grayOut.SetActive(true);
+        bushes.SetActive(true);
     }
 
     public void InitializeTypingTestOptions()

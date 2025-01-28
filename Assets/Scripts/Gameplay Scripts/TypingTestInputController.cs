@@ -52,6 +52,7 @@ public class TypingTestInputController : MonoBehaviour
         }
     }
 
+    // Gets Initiated from external sources
     public void StartTypingTest()
     {
         StartCoroutine(TypingTestActions());
