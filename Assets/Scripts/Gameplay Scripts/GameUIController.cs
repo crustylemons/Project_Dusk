@@ -9,13 +9,15 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject bushes;
     [SerializeField] private GameObject grayOut;
 
-    [Header("Before Typing Test UI")]
+    [Header("Typing Test UI")]
     [SerializeField] private GameObject typingTestBeginningBox;
+    [SerializeField] private GameObject typingTestEndingBox;
     [SerializeField] private List<Button> buttonList;
     private string handMode;
 
-    [Header("Before Stray Trails UI")]
+    [Header("Stray Trails UI")]
     [SerializeField] private GameObject strayTrailsBeginningBox;
+    [SerializeField] private GameObject strayTrailsEndingBox;
 
     [Header("While In Typing Test UI")]
     [SerializeField] private GameObject wordBox;
@@ -23,7 +25,6 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject timer;
 
     [Header("End Game UI")]
-    [SerializeField] private GameObject endingBox;
     [SerializeField] private GameObject WPMBox;
     [SerializeField] private GameObject accuracyBox;
     [SerializeField] private GameObject playAgainBtn;
@@ -67,7 +68,7 @@ public class GameUIController : MonoBehaviour
     {
         // Inactive
         wordBox.SetActive(false);
-        endingBox.SetActive(false);
+        typingTestEndingBox.SetActive(false);
         timer.SetActive(false);
         typingTestBeginningBox.SetActive(false);
 
@@ -81,7 +82,7 @@ public class GameUIController : MonoBehaviour
     {
         // Inactive
         beginningBox.SetActive(false);
-        endingBox.SetActive(false);
+        strayTrailsEndingBox.SetActive(false);
         grayOut.SetActive(false);
         bushes.SetActive(false);
 
@@ -91,7 +92,10 @@ public class GameUIController : MonoBehaviour
 
     public void StopStrayTrails()
     {
-        endingBox.SetActive(true);
+        // Inactive
+
+        // Active
+        strayTrailsEndingBox.SetActive(true);
         grayOut.SetActive(true);
         bushes.SetActive(true);
     }
@@ -100,7 +104,7 @@ public class GameUIController : MonoBehaviour
     {
         // Inactive
         wordBox.SetActive(false);
-        endingBox.SetActive(false);
+        typingTestEndingBox.SetActive(false);
         timer.SetActive(false);
         beginningBox.SetActive(false);
 
@@ -114,7 +118,7 @@ public class GameUIController : MonoBehaviour
     {
         // Inactive
         typingTestBeginningBox.SetActive(false);
-        endingBox.SetActive(false);
+        typingTestEndingBox.SetActive(false);
         grayOut.SetActive(false);
         bushes.SetActive(false);
 
@@ -133,7 +137,7 @@ public class GameUIController : MonoBehaviour
         wordBox.SetActive(false);
         timer.SetActive(false);
 
-        endingBox.SetActive(true);
+        typingTestEndingBox.SetActive(true);
         grayOut.SetActive(true);
         bushes.SetActive(true);
     }

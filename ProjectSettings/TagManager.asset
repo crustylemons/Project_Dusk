@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - playerStats
+  - obstacle
   layers:
   - Default
   - TransparentFX

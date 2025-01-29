@@ -8,7 +8,10 @@ public class StrayTrailsCatController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        inputController.StopStrayTrails();
-        Debug.Log("Cat has collided with " + collision.gameObject.name);
+        if (collision.CompareTag("obstacle"))
+        {
+            inputController.StopStrayTrails();
+            Debug.Log("Cat has collided with " + collision.name);
+        }
     }
 }

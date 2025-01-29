@@ -12,12 +12,26 @@ public class HoverableObject : MonoBehaviour
     [SerializeField] private CutsceneController cutsceneController;
     [SerializeField] private Cutscene cutscene;
 
+    private bool isFurniture = false;
+
+
+    private void Start()
+    {
+        // Validate if it's furniture
+        if (gameObject.GetComponent<Furniture>() != null) { isFurniture = true; }
+        else { isFurniture = false; }
+    }
 
     private void OnMouseOver()
     {
         if (cursorManager.GetCursorVisibility())
         {
             cursorManager.ChangeCursor(cursorTexture);
+
+            if (isFurniture)
+            {
+                // UI coding here
+            }
         }
     }
 
@@ -26,14 +40,18 @@ public class HoverableObject : MonoBehaviour
         if (cursorManager.GetCursorVisibility())
         {
             cursorManager.ChangeBackCursor();
+
+            if (isFurniture)
+            {
+                // UI coding here
+            }
         }
     }
 
     private void OnMouseDown()
     {
-        if (cursorManager.GetCursorVisibility())
+        if (cursorManager.GetCursorVisibility() && !isFurniture)
         {
-            Debug.Log("mouse was pressed");
             cutsceneController.StartCutscene(cutscene.GetName());
         }
     }
