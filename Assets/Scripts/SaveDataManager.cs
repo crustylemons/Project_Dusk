@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveDataManager : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class SaveDataManager : MonoBehaviour
     private int[] items;
     private int couch;
     private int catBed;
+    private int plant;
 
     private void Awake()
     {
@@ -26,6 +27,19 @@ public class SaveDataManager : MonoBehaviour
         items = new int[2] { couch, catBed };
     }
 
+    public void FindStatsManager()
+    {
+        // If it's in the game's scene, find statsManager
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName == "Gameplay")
+        {
+            statsManager = FindAnyObjectByType<TypingTestStatsManager>();
+            
+        }
+    }
+
+
     public void UpdateCollectedItem(string ItemName)
     {
        // Find the correct object name and increment it
@@ -35,6 +49,8 @@ public class SaveDataManager : MonoBehaviour
                 couch++; break;
             case "cat bed":
                 catBed++; break;
+            case "plant":
+                plant++; break;
             default:
                 Debug.Log("Couldn't find an item to update");
                 break;
@@ -51,6 +67,8 @@ public class SaveDataManager : MonoBehaviour
                 return couch;
             case "cat bed":
                 return catBed;
+            case "plant":
+                return plant;
             default: 
                 return 0;
         }

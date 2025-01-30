@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 6a1d263a93610b04180ff546017788bb
   - enabled: 1
-    path: Assets/Scenes/DynamicTypingTest.unity
+    path: Assets/Scenes/Gameplay.unity
     guid: 3e4fa92024fd11445a8135f420e0e057
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

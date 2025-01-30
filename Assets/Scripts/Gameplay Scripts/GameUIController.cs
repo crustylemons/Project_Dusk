@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class GameUIController : MonoBehaviour
     [Header("Stray Trails UI")]
     [SerializeField] private GameObject strayTrailsBeginningBox;
     [SerializeField] private GameObject strayTrailsEndingBox;
+    [SerializeField] private GameObject itemUIPrefab;
 
     [Header("While In Typing Test UI")]
     [SerializeField] private GameObject wordBox;
@@ -68,9 +70,10 @@ public class GameUIController : MonoBehaviour
     {
         // Inactive
         wordBox.SetActive(false);
-        typingTestEndingBox.SetActive(false);
-        timer.SetActive(false);
         typingTestBeginningBox.SetActive(false);
+        typingTestEndingBox.SetActive(false);
+        strayTrailsEndingBox.SetActive(false);
+        timer.SetActive(false);
 
         // Active
         beginningBox.SetActive(true);

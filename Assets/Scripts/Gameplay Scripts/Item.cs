@@ -17,15 +17,15 @@ public class Item : MonoBehaviour
         {
             furnitureName = gameObject.name;
         }
-    }
 
-    void Update()
-    {
-        
+        // Connections
+        saveData = FindFirstObjectByType<SaveDataManager>();
     }
 
     public void Collect()
     {
         saveData.UpdateCollectedItem(furnitureName);
+
+        Destroy(gameObject);
     }
 }

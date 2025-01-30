@@ -75,13 +75,12 @@ public class StrayTrailsInputController : MonoBehaviour
 
     private IEnumerator ItemInputCoroutine(Item item)
     {
+
         KeyCode[] keyCodes = new KeyCode[4] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         KeyCode chosenKey = keyCodes[Random.Range(0, keyCodes.Length)];
 
-        Debug.Log($"Waiting for {chosenKey.ToString()} to be pressed");
+        Debug.Log($"Waiting for {chosenKey} to be pressed");
         yield return new WaitUntil(() => Input.GetKeyDown(chosenKey));
-
-        Debug.Log($"{chosenKey} was pressed");
 
         item.Collect();
     }

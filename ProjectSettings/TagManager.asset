@@ -6,6 +6,7 @@ TagManager:
   tags:
   - playerStats
   - obstacle
+  - saveData
   layers:
   - Default
   - TransparentFX

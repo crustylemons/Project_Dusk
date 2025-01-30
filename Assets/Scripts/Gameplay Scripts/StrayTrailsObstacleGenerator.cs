@@ -58,7 +58,7 @@ public class StrayTrailsObstacleGenerator : MonoBehaviour
         {
             StopSpawning();
         }
-        else if (!inputController.IsPlaying() && isPlaying == false)
+        else if (inputController.IsPlaying() && isPlaying == false)
         {
             StartSpawning();
         }
