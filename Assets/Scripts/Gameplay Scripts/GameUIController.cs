@@ -20,6 +20,8 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject strayTrailsBeginningBox;
     [SerializeField] private GameObject strayTrailsEndingBox;
     [SerializeField] private GameObject itemUIPrefab;
+    [SerializeField] private GameObject scoreText;
+    [SerializeField] private GameObject totalItemsText;
 
     [Header("While In Typing Test UI")]
     [SerializeField] private GameObject wordBox;
@@ -39,6 +41,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private AudioClip escOpen;
     [SerializeField] private AudioClip escClose;
     private TypingTestStatsManager playerStatsManager;
+    private SaveDataManager saveDataManager;
 
 
     private void Awake()
@@ -46,7 +49,8 @@ public class GameUIController : MonoBehaviour
         blackTransition.SetActive(true);
         InitializePlayChoice();
 
-        playerStatsManager = FindFirstObjectByType<TypingTestStatsManager>();
+        playerStatsManager = FindAnyObjectByType<TypingTestStatsManager>();
+        saveDataManager = FindFirstObjectByType<SaveDataManager>();
     }
 
     public void SetWPM(int wpm)
@@ -95,7 +99,9 @@ public class GameUIController : MonoBehaviour
 
     public void StopStrayTrails()
     {
-        // Inactive
+        // Update
+        scoreText.GetComponent<Text>().text = "Score = null"; // update this when score is implemented
+        totalItemsText.GetComponent<Text>().text = "Total Collected Items = " + saveDataManager.GetTotalCollected().ToString();
 
         // Active
         strayTrailsEndingBox.SetActive(true);

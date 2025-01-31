@@ -7,9 +7,15 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private Animator catAnimator;
 
     [SerializeField] private DialogueController dialogueController;
+    [SerializeField] private SaveDataManager saveDataManager;
 
     [SerializeField] private Cutscene[] cutscenes;
-    
+
+
+    private void Start()
+    {
+        saveDataManager = FindAnyObjectByType<SaveDataManager>();
+    }
 
     private IEnumerator WaitForDialogue()
     {
@@ -44,7 +50,8 @@ public class CutsceneController : MonoBehaviour
         // Iterate through given cutscenes
         foreach (Cutscene c in cutscenes)
         {
-            if (c.GetHasPlayed() == false && c.GetName() == name || c.GetCanPlayMultiple() && c.GetName() == name)
+            if (c.GetName() == "Enter House" && saveDataManager.HasHouseCutscenePlayed()) { Debug.Log("Intro House has already played"); break; }
+            if (c.GetHasPlayed() == false && c.GetName() == name)
             {
                 c.gameObject.GetComponent<PlayableDirector>().Play();
                 break;
@@ -52,16 +59,5 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
-    public Cutscene GetNextUnplayedCutscene()
-    {
-        foreach (Cutscene c in cutscenes)
-        {
-            if (c.GetHasPlayed() == false || c.GetCanPlayMultiple())
-            {
-                return c;
-            }
-        }
-        return null;
-    }
 }
 

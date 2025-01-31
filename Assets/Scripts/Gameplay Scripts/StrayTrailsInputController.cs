@@ -80,9 +80,13 @@ public class StrayTrailsInputController : MonoBehaviour
         KeyCode chosenKey = keyCodes[Random.Range(0, keyCodes.Length)];
 
         Debug.Log($"Waiting for {chosenKey} to be pressed");
-        yield return new WaitUntil(() => Input.GetKeyDown(chosenKey));
+        yield return new WaitUntil(() => Input.GetKeyDown(chosenKey) || item == null);
 
-        item.Collect();
+        // If it wasn't already destroyed
+        if (item != null)
+        {
+            item.Collect();
+        }
     }
 
     public bool IsPlaying() { return isPlaying; }

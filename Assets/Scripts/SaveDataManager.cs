@@ -8,10 +8,12 @@ public class SaveDataManager : MonoBehaviour
     [SerializeField] private TypingTestStatsManager statsManager;
 
     // Data
-    private int[] items;
+   [SerializeField] private int itemsCollectedCount;
     private int couch;
     private int catBed;
     private int plant;
+
+    private bool hasHomeCutscenePlayed = false;
 
     private void Awake()
     {
@@ -24,7 +26,6 @@ public class SaveDataManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        items = new int[2] { couch, catBed };
     }
 
     public void FindStatsManager()
@@ -36,6 +37,8 @@ public class SaveDataManager : MonoBehaviour
         {
             statsManager = FindAnyObjectByType<TypingTestStatsManager>();
             
+
+            itemsCollectedCount = 0;
         }
     }
 
@@ -56,7 +59,8 @@ public class SaveDataManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"couch count = {couch}, cat bed count = {catBed}");
+        // Update the amount collected that round
+        itemsCollectedCount++;
     }
 
     public int GetCollectedItemCount(string ItemName)
@@ -74,4 +78,14 @@ public class SaveDataManager : MonoBehaviour
         }
     }
 
+
+    public int GetTotalCollected() {  return itemsCollectedCount; }
+
+    public void HomeCutscenePlayed() { hasHomeCutscenePlayed = true; }
+
+    public bool HasHouseCutscenePlayed()
+    {
+        if (hasHomeCutscenePlayed) return true;
+        else return false;
+    }
 }

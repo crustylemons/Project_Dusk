@@ -540,6 +540,7 @@ MonoBehaviour:
   cutsceneName: Shake Tree
   hasPlayed: 0
   canPlayMultipleTimes: 1
+  playOnAwake: 0
 --- !u!1 &474797705
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,8 +609,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.53345, y: -1.00775, z: 0}
-    m_Extent: {x: 1.72745, y: 2.16885, z: 0}
+    m_Center: {x: -0.5353001, y: -1.0172, z: 0}
+    m_Extent: {x: 1.7311001, y: 2.1699, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -978,7 +979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 773369647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658702528
 GameObject:
@@ -1326,6 +1327,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 641424294}
   - {fileID: 1838180728}
   - {fileID: 535986780}
   - {fileID: 366309016}
@@ -3023,6 +3025,7 @@ MonoBehaviour:
   cutsceneName: Mouse Hole
   hasPlayed: 0
   canPlayMultipleTimes: 0
+  playOnAwake: 0
 --- !u!1 &825208104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3772,8 +3775,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.4925, y: -1.0882, z: 0}
-    m_Extent: {x: 1.7721, y: 2.2066998, z: 0}
+    m_Center: {x: -0.50084996, y: -1.0825, z: 0}
+    m_Extent: {x: 1.77525, y: 2.2112, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4071,8 +4074,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.46345, y: -0.95780003, z: 0}
-    m_Extent: {x: 1.6633501, y: 2.1611, z: 0}
+    m_Center: {x: -0.45660007, y: -0.94874996, z: 0}
+    m_Extent: {x: 1.6662, y: 2.1533499, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4881,6 +4884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsManager: {fileID: 0}
+  itemsCollectedCount: 0
 --- !u!4 &1656902179
 Transform:
   m_ObjectHideFlags: 0
@@ -6755,6 +6759,7 @@ MonoBehaviour:
   cutsceneName: Enter House
   hasPlayed: 0
   canPlayMultipleTimes: 0
+  playOnAwake: 0
 --- !u!114 &1976673661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6803,6 +6808,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1656902178}
+          m_TargetAssemblyTypeName: SaveDataManager, Assembly-CSharp
+          m_MethodName: HomeCutscenePlayed
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7355,7 +7372,6 @@ SceneRoots:
   - {fileID: 993909343}
   - {fileID: 475288621}
   - {fileID: 773369647}
-  - {fileID: 641424294}
   - {fileID: 1150824496076241355}
   - {fileID: 2051792878}
   - {fileID: 825208105}

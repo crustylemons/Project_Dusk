@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MyCamera : MonoBehaviour
+public class MyIntroCamera : MonoBehaviour
 {
-    [SerializeField] private Cat cat;
+    [SerializeField] private GameObject cat;
     [SerializeField] private GameObject blackTransition;
 
 
