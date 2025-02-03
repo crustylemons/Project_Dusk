@@ -1,20 +1,46 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class CutsceneController : MonoBehaviour
 {
     [SerializeField] private Animator catAnimator;
 
     [SerializeField] private DialogueController dialogueController;
-    [SerializeField] private SaveDataManager saveDataManager;
+    [SerializeField] private SaveDataManager saveData;
+
+    private HouseCat cat;
 
     [SerializeField] private Cutscene[] cutscenes;
 
 
     private void Start()
     {
-        saveDataManager = FindAnyObjectByType<SaveDataManager>();
+        saveData = GameObject.FindWithTag("saveData").GetComponent<SaveDataManager>();
+
+        // If the current is is Home
+        if (SceneManager.GetActiveScene().name == "Home")
+        {
+            cat = FindAnyObjectByType<HouseCat>();
+
+            // If the player has already been in the home before and played the beginning cutscene
+            if (saveData && saveData.HasHouseCutscenePlayed())
+            {
+                
+                foreach (Cutscene c in cutscenes)
+                {
+                    if (c.GetName() == "Enter House")
+                    {
+                        // Set "Enter House" to has played before
+                        c.SetHasPlayed();
+
+                        // Start position control -- what would otherwise be started at the end of the Timeline
+                        if (cat) { cat.StartPositionControl(); }
+                    }
+                }
+            }
+        }
     }
 
     private IEnumerator WaitForDialogue()
@@ -47,10 +73,12 @@ public class CutsceneController : MonoBehaviour
 
     public void StartCutscene(string name)
     {
+        // Check if it's attempting to play the Enter House cutscene again
+        if (name == "Enter House" && saveData.HasHouseCutscenePlayed()) { Debug.Log("Intro House has already played"); return; }
+        
         // Iterate through given cutscenes
         foreach (Cutscene c in cutscenes)
         {
-            if (c.GetName() == "Enter House" && saveDataManager.HasHouseCutscenePlayed()) { Debug.Log("Intro House has already played"); break; }
             if (c.GetHasPlayed() == false && c.GetName() == name)
             {
                 c.gameObject.GetComponent<PlayableDirector>().Play();

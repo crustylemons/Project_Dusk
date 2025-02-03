@@ -8,12 +8,12 @@ public class SaveDataManager : MonoBehaviour
     [SerializeField] private TypingTestStatsManager statsManager;
 
     // Data
-   [SerializeField] private int itemsCollectedCount;
+    [SerializeField] private int itemsCollectedCount;
     private int couch;
     private int catBed;
     private int plant;
 
-    private bool hasHomeCutscenePlayed = false;
+    [SerializeField] private bool hasHomeCutscenePlayed = false;
 
     private void Awake()
     {

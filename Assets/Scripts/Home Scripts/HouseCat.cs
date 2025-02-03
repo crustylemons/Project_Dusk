@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,14 +37,11 @@ public class HouseCat : MonoBehaviour
                 Animate(true);
 
                 // stay in position for random amound of time
-                int rnd = Random.Range(30, 45);
-                print(rnd + " amount of seconds before new position");
+                int rnd = Random.Range(15, 20);
                 yield return new WaitForSeconds(rnd);
 
                 // Set new targetPos
                 ChooseNewPosition();
-
-                Debug.Log("Going to new position");
             }
             // If gameobject is not at the position
             else

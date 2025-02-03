@@ -594,7 +594,6 @@ MonoBehaviour:
   - Meow meow meow (It's lovely to meet you)
   cutsceneName: IntroCutscene
   hasPlayed: 0
-  canPlayMultipleTimes: 0
   playOnAwake: 1
 --- !u!1 &96354496
 GameObject:
@@ -2678,6 +2677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catAnimator: {fileID: 957902179117685190}
   dialogueController: {fileID: 964132262}
+  saveData: {fileID: 0}
   cutscenes:
   - {fileID: 80163610}
 --- !u!114 &892453886
@@ -3342,15 +3342,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

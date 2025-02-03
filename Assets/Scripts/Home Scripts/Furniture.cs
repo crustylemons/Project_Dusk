@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
     [SerializeField] private string furnitureName;
-    [SerializeField] private SaveDataManager saveData;
+    private SaveDataManager saveData;
 
     [SerializeField] private int collectedCount;
     [SerializeField] private int needToCollect = 5;
+    private bool isCollected = false;
 
     private void Start()
     {
@@ -19,12 +19,16 @@ public class Furniture : MonoBehaviour
         }
 
         // Get saved data
-        saveData = FindFirstObjectByType<SaveDataManager>();
+        saveData = GameObject.FindWithTag("saveData").GetComponent<SaveDataManager>();
         if (saveData)
         {
             collectedCount = saveData.GetCollectedItemCount(furnitureName);
             if (collectedCount >= needToCollect)
             {
+                // Data Change
+                isCollected = true;
+
+                // Visual Changes
                 SpriteRenderer r = gameObject.GetComponent<SpriteRenderer>();
                 Color color = new Color(r.color.r, r.color.g, r.color.b, 1f);
                 r.color = color;
