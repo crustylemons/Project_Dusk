@@ -2224,9 +2224,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9992442b96eb64474bbcdec630901215, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7ca32afb6d41bd94e853ff7c7c0d54f6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2448,6 +2448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0d62fcc8f1fd24f8d6624d546a7be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 307780578}
   beginningBox: {fileID: 1189012198}
   bushes: {fileID: 1182390155}
   grayOut: {fileID: 1118944473}
@@ -2459,7 +2460,7 @@ MonoBehaviour:
   - {fileID: 2022777107}
   strayTrailsBeginningBox: {fileID: 2091500470}
   strayTrailsEndingBox: {fileID: 297288675}
-  itemUIPrefab: {fileID: 0}
+  itemUIPrefab: {fileID: 6217218864103639131, guid: bd032c9f8a5e83c4696320176d27cb89, type: 3}
   scoreText: {fileID: 311241344}
   totalItemsText: {fileID: 189480968}
   wordBox: {fileID: 285268939}
@@ -8516,7 +8517,6 @@ GameObject:
   - component: {fileID: 1207521645}
   - component: {fileID: 1207521644}
   - component: {fileID: 1207521647}
-  - component: {fileID: 1207521648}
   - component: {fileID: 1207521649}
   m_Layer: 0
   m_Name: Main Camera
@@ -8647,22 +8647,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &1207521648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207521643}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
 --- !u!114 &1207521649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8680,7 +8664,7 @@ MonoBehaviour:
   m_RefResolutionX: 1920
   m_RefResolutionY: 1080
   m_CropFrame: 2
-  m_GridSnapping: 0
+  m_GridSnapping: 2
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0

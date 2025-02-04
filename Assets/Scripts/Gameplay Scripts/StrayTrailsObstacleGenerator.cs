@@ -72,6 +72,7 @@ public class StrayTrailsObstacleGenerator : MonoBehaviour
 
     private IEnumerator StartSpawningCoroutine()
     {
+        yield return new WaitForSeconds(Random.Range(2, 3)); // delay
         while(isPlaying)
         {
             // Validate there aren't too many obstacles

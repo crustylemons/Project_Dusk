@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
-    [SerializeField] private string furnitureName;
+    [SerializeField] private HomeUIController UIController;
     private SaveDataManager saveData;
 
+    [Header("Data")]
+    [SerializeField] private string furnitureName;
     [SerializeField] private int collectedCount;
     [SerializeField] private int needToCollect = 5;
-    private bool isCollected = false;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip onHoverSoundFX;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -25,8 +30,6 @@ public class Furniture : MonoBehaviour
             collectedCount = saveData.GetCollectedItemCount(furnitureName);
             if (collectedCount >= needToCollect)
             {
-                // Data Change
-                isCollected = true;
 
                 // Visual Changes
                 SpriteRenderer r = gameObject.GetComponent<SpriteRenderer>();
@@ -37,4 +40,20 @@ public class Furniture : MonoBehaviour
     }
 
     public int GetCollectedCount() {  return collectedCount; }
+
+    private void OnMouseEnter()
+    {
+        audioSource.PlayOneShot(onHoverSoundFX);
+    }
+
+    private void OnMouseOver()
+    {
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        UIController.OnMouseHoverFurniture(screenPos, collectedCount, needToCollect);
+    }
+
+    private void OnMouseExit()
+    {
+        UIController.OnMouseExitFurniture();   
+    }
 }

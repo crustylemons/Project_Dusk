@@ -25,7 +25,6 @@ public class StrayTrailsItemGenerator : MonoBehaviour
         if (possibleItems.Length == 0) { Debug.Log("There are no possible items for Stray Trails Mode collectables"); }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentItems.Count >  0 && inputController.IsPlaying())
@@ -37,7 +36,7 @@ public class StrayTrailsItemGenerator : MonoBehaviour
                 if (!item) { currentItems.Remove(item); break; }
 
                 // Validate if the item is at the destory point
-                if (item.transform.position.x == itemDestroyPoint.x)
+                if (Mathf.Abs(item.transform.position.x - itemDestroyPoint.x) < 0.1f)
                 {
                     Destroy(item);
                 }
@@ -45,6 +44,7 @@ public class StrayTrailsItemGenerator : MonoBehaviour
                 {
                     // Move Item
                     Vector2 target = new Vector2(itemDestroyPoint.x, item.transform.position.y);
+
                     float itemSpeed = tileMapController.GetTileMapSpeed(); // speed is based on tile map speed
                     item.transform.position = Vector2.MoveTowards(item.transform.position, target, itemSpeed * Time.deltaTime);
                 }
@@ -69,6 +69,8 @@ public class StrayTrailsItemGenerator : MonoBehaviour
 
     private IEnumerator StartSpawningCoroutine()
     {
+        yield return new WaitForSeconds(Random.Range(2,3)); // delay
+
         while (isPlaying)
         {
             // Validate there aren't too many items

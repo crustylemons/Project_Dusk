@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StrayTrailsInputController : MonoBehaviour
 {
@@ -79,7 +81,11 @@ public class StrayTrailsInputController : MonoBehaviour
         KeyCode[] keyCodes = new KeyCode[4] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         KeyCode chosenKey = keyCodes[Random.Range(0, keyCodes.Length)];
 
-        Debug.Log($"Waiting for {chosenKey} to be pressed");
+        // UI
+        GameObject itemUI = UIController.CreateNewItemUI();
+        itemUI.GetComponentInChildren<Text>().text = chosenKey.ToString();
+        StartCoroutine(UpdateItemUIPos(item, itemUI));
+
         yield return new WaitUntil(() => Input.GetKeyDown(chosenKey) || item == null);
 
         // If it wasn't already destroyed
@@ -87,6 +93,22 @@ public class StrayTrailsInputController : MonoBehaviour
         {
             item.Collect();
         }
+    }
+
+    private IEnumerator UpdateItemUIPos(Item item, GameObject UIElement)
+    {
+        Vector2 velocity = Vector2.zero;
+        UIElement.transform.position = Camera.main.WorldToScreenPoint(item.transform.position);
+        while (!item.IsDestroyed())
+        {
+            Vector2 currentUIPos = UIElement.transform.position;
+            Vector2 targetUIPos = Camera.main.WorldToScreenPoint(item.transform.position);
+
+            
+            UIElement.transform.position = Vector2.SmoothDamp(currentUIPos, targetUIPos, ref velocity, 0.1f);
+            yield return null;
+        }
+        Destroy(UIElement);
     }
 
     public bool IsPlaying() { return isPlaying; }

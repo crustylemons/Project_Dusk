@@ -17,35 +17,28 @@ public class TileMapController : MonoBehaviour
 
     private bool catIsRunning = false;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (catIsRunning)
-        {
-            longGrassRbOne.transform.position = Vector2.MoveTowards(longGrassRbOne.transform.position, new Vector2 (-16,0), tileMapSpeed * Time.deltaTime);
-            longGrassRbTwo.transform.position = Vector2.MoveTowards(longGrassRbTwo.transform.position, new Vector2(-16,0), tileMapSpeed * Time.deltaTime);
-        }
-    }
-
     private void Update()
     {
         if (catIsRunning)
         {
-            if (Mathf.RoundToInt(longGrassRbOne.gameObject.transform.position.x) == -16)
+            longGrassRbOne.transform.position = Vector2.MoveTowards(longGrassRbOne.transform.position, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
+            longGrassRbTwo.transform.position = Vector2.MoveTowards(longGrassRbTwo.transform.position, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
+
+            if (Mathf.RoundToInt(longGrassRbOne.transform.position.x) == -16)
             {
-                longGrassRbOne.gameObject.transform.position = new Vector2(16, 0);
+                longGrassRbOne.transform.position = new Vector2(16, 0);
             }
 
-            if (Mathf.RoundToInt(longGrassRbTwo.gameObject.transform.position.x) == -16)
+            if (Mathf.RoundToInt(longGrassRbTwo.transform.position.x) == -16)
             {
-                longGrassRbTwo.gameObject.transform.position = new Vector2(16, 0);
+                longGrassRbTwo.transform.position = new Vector2(16, 0);
             }
         }
         else
         {
             // Reset positions if the cat has stopped moving
-            longGrassRbOne.gameObject.transform.position = new Vector2(0, 0);
-            longGrassRbTwo.gameObject.transform.position = new Vector2(16, 0);
+            longGrassRbOne.transform.position = new Vector2(0, 0);
+            longGrassRbTwo.transform.position = new Vector2(16, 0);
         }
     }
 

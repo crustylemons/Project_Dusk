@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameUIController : MonoBehaviour
 {
+    [SerializeField] private Canvas canvas;
+
     [Header("Before Playing UI")]
     [SerializeField] private GameObject beginningBox;
     [SerializeField] private GameObject bushes;
@@ -92,9 +94,6 @@ public class GameUIController : MonoBehaviour
         strayTrailsEndingBox.SetActive(false);
         grayOut.SetActive(false);
         bushes.SetActive(false);
-
-
-        // Active
     }
 
     public void StopStrayTrails()
@@ -171,5 +170,11 @@ public class GameUIController : MonoBehaviour
             audioSource.PlayOneShot(escOpen);
             esc.SetActive(true);
         }
+    }
+    
+    public GameObject CreateNewItemUI()
+    {
+        GameObject itemUI = Instantiate(itemUIPrefab, canvas.transform);
+        return itemUI;
     }
 }
