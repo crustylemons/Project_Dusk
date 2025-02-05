@@ -11,7 +11,6 @@ public class StrayTrailsCatController : MonoBehaviour
         if (collision.CompareTag("obstacle"))
         {
             inputController.StopStrayTrails();
-            Debug.Log("Cat has collided with " + collision.name);
         }
     }
 }

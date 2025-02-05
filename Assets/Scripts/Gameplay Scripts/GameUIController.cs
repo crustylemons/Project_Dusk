@@ -22,8 +22,11 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject strayTrailsBeginningBox;
     [SerializeField] private GameObject strayTrailsEndingBox;
     [SerializeField] private GameObject itemUIPrefab;
-    [SerializeField] private GameObject scoreText;
+    [SerializeField] private GameObject endScoreText;
     [SerializeField] private GameObject totalItemsText;
+    [SerializeField] private GameObject scoreDisplay;
+    [SerializeField] private GameObject catBedNumDisplay;
+    [SerializeField] private GameObject couchNumDisplay;
 
     [Header("While In Typing Test UI")]
     [SerializeField] private GameObject wordBox;
@@ -42,8 +45,8 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip escOpen;
     [SerializeField] private AudioClip escClose;
-    private TypingTestStatsManager playerStatsManager;
-    private SaveDataManager saveDataManager;
+    private TypingTestStatsManager playerStats;
+    private SaveDataManager saveData;
 
 
     private void Awake()
@@ -51,8 +54,8 @@ public class GameUIController : MonoBehaviour
         blackTransition.SetActive(true);
         InitializePlayChoice();
 
-        playerStatsManager = FindAnyObjectByType<TypingTestStatsManager>();
-        saveDataManager = FindFirstObjectByType<SaveDataManager>();
+        playerStats = FindAnyObjectByType<TypingTestStatsManager>();
+        saveData = FindFirstObjectByType<SaveDataManager>();
     }
 
     public void SetWPM(int wpm)
@@ -67,9 +70,16 @@ public class GameUIController : MonoBehaviour
         text.text = $"Accuracy = {accuracy}%";
     }
 
-    public void SetTimer(int seconds)
+    public void SetTimer(int seconds, bool isTypingTest)
     {
-        timer.GetComponentInChildren<Text>().text = seconds.ToString();
+        if (isTypingTest)
+        {
+            timer.GetComponentInChildren<Text>().text = seconds.ToString();
+        }
+        else
+        {
+            scoreDisplay.GetComponentInChildren<Text>().text = seconds.ToString();
+        }
     }
 
     public void InitializePlayChoice()
@@ -94,19 +104,37 @@ public class GameUIController : MonoBehaviour
         strayTrailsEndingBox.SetActive(false);
         grayOut.SetActive(false);
         bushes.SetActive(false);
+
+        // Active
+        scoreDisplay.SetActive(true);
     }
 
     public void StopStrayTrails()
     {
-        // Update
-        scoreText.GetComponent<Text>().text = "Score = null"; // update this when score is implemented
-        totalItemsText.GetComponent<Text>().text = "Total Collected Items = " + saveDataManager.GetTotalCollected().ToString();
+        // Update Values
+        int score = saveData.GetRecentScore();
+        int highScore = saveData.GetHighScore();
+        string scoreString;
+        if (score > highScore) { scoreString = "NEW HIGH Score = "; }
+        else { scoreString = "Score = "; }
+
+        endScoreText.GetComponent<Text>().text = scoreString + score;
+        totalItemsText.GetComponent<Text>().text = "Total Collected Items = " + saveData.GetTotalCollected().ToString();
+
+        //couchNumDisplay.GetComponent<Text>().text = saveData.Get
+        // Update Certain Numbers here
 
         // Active
         strayTrailsEndingBox.SetActive(true);
         grayOut.SetActive(true);
         bushes.SetActive(true);
+
+        // Inactive
+        scoreDisplay.SetActive(false);
     }
+
+    // Score for Stray Trails mode
+    public void UpdateScore(int scoreNum) { scoreDisplay.GetComponentInChildren<Text>().text = scoreNum.ToString(); }
 
     public void InitializeTypingTestOptions()
     {
@@ -138,8 +166,8 @@ public class GameUIController : MonoBehaviour
     public void EndTypingTest()
     {
         // Set values of stats in the UI
-        SetWPM(playerStatsManager.GetWordsPerMinute());
-        SetAccuracy(playerStatsManager.GetAccuracy());
+        SetWPM(playerStats.GetWordsPerMinute());
+        SetAccuracy(playerStats.GetAccuracy());
 
         // UI enabling/disabling
         wordBox.SetActive(false);

@@ -29,7 +29,7 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left && pressedSound != null)
         {
             AudioSource.PlayOneShot(pressedSound);
         }

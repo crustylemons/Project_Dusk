@@ -12,6 +12,8 @@ public class SaveDataManager : MonoBehaviour
     private int couch;
     private int catBed;
     private int plant;
+    private int strayTrailsRecentScore;
+    private int strayTrailsHighScore;
 
     [SerializeField] private bool hasHomeCutscenePlayed = false;
 
@@ -88,4 +90,17 @@ public class SaveDataManager : MonoBehaviour
         if (hasHomeCutscenePlayed) return true;
         else return false;
     }
+
+    public void UpdateScore(int recentScore)
+    {
+        strayTrailsRecentScore = recentScore;
+        if (recentScore > strayTrailsHighScore)
+        {
+            strayTrailsHighScore = recentScore;
+        }
+    }
+
+    public int GetHighScore() { return strayTrailsHighScore; }
+
+    public int GetRecentScore() { return strayTrailsRecentScore; }
 }

@@ -12,6 +12,8 @@ public class StrayTrailsInputController : MonoBehaviour
     [SerializeField] private TileMapController tileMapController;
     [SerializeField] private StrayTrailsCatController catController;
     [SerializeField] private GameUIController UIController;
+    [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private GameAudioController audioController;
 
     [Header("Positions")]
     [SerializeField] private Vector3 positionOne;
@@ -23,22 +25,27 @@ public class StrayTrailsInputController : MonoBehaviour
     // Initiate Input Controlling
     public void StartStrayTrails()
     {
+        cat.transform.position = positionOne;
+        UIController.StartStrayTrails();
+
+        StartCoroutine(TakeInput());
+    }
+
+    private IEnumerator TakeInput()
+    {
+        // Countdown
+        audioController.StartCountDown();
+        yield return StartCoroutine(CountDown(3));
+
+        // Intiate other scripts
+        tileMapController.SetCatIsRunning(true);
+        scoreManager.InitializeScoring();
+        isPlaying = true;
+
         // Cat Animation
         catAnimator = cat.GetComponent<Animator>();
         catAnimator.SetBool("IsMoving", true);
-        cat.transform.position = positionOne;
 
-        // Tell other scripts to start the game
-        UIController.StartStrayTrails();
-        tileMapController.SetCatIsRunning(true);
-
-        // Inside script calls
-        isPlaying = true;
-        StartCoroutine(InputCoroutine());
-    }
-
-    private IEnumerator InputCoroutine()
-    {
         while (isPlaying)
         {
             // Get player input to move the cat
@@ -67,7 +74,7 @@ public class StrayTrailsInputController : MonoBehaviour
         // Tell other scripts that the game is over
         tileMapController.SetCatIsRunning(false);
         UIController.StopStrayTrails();
-        
+        scoreManager.StopScoring();
     }
 
     public void AddItem(GameObject item)
@@ -78,7 +85,14 @@ public class StrayTrailsInputController : MonoBehaviour
     private IEnumerator ItemInputCoroutine(Item item)
     {
 
-        KeyCode[] keyCodes = new KeyCode[4] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
+        KeyCode[] keyCodes = new KeyCode[26] {
+            KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E,
+            KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J,
+            KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N, KeyCode.O,
+            KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T,
+            KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y,
+            KeyCode.Z
+        };
         KeyCode chosenKey = keyCodes[Random.Range(0, keyCodes.Length)];
 
         // UI
@@ -112,4 +126,17 @@ public class StrayTrailsInputController : MonoBehaviour
     }
 
     public bool IsPlaying() { return isPlaying; }
+
+    private IEnumerator CountDown(int seconds)
+    {
+        int secondsLeft = seconds;
+        UIController.SetTimer(secondsLeft, false);
+
+        for (int i = seconds; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            secondsLeft--;
+            UIController.SetTimer(secondsLeft, false);
+        }
+    }
 }

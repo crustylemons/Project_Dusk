@@ -10,6 +10,8 @@ public class StrayTrailsItemGenerator : MonoBehaviour
 
     [Header("Items")]
     [SerializeField] private GameObject[] possibleItems;
+    [SerializeField] private List<GameObject> possibleItemsWithRarity; // duplicates items based on how common they are
+
     [SerializeField] private List<GameObject> currentItems;
     [SerializeField] private Vector3 itemDestroyPoint;
     [SerializeField] private int maxItems = 10;
@@ -23,6 +25,22 @@ public class StrayTrailsItemGenerator : MonoBehaviour
     void Start()
     {
         if (possibleItems.Length == 0) { Debug.Log("There are no possible items for Stray Trails Mode collectables"); }
+        else
+        {
+            foreach (GameObject item in possibleItems)
+            {
+                int itemCommonMultiplier = item.GetComponent<Item>().GetCommonMultiplier();
+                if (itemCommonMultiplier < 1)
+                {
+                    itemCommonMultiplier = 1;
+                }
+                for(int i = 1; i <= itemCommonMultiplier; i++)
+                {
+                    possibleItemsWithRarity.Add(item);
+                }
+            }
+        }
+        
     }
 
     void Update()
@@ -77,7 +95,7 @@ public class StrayTrailsItemGenerator : MonoBehaviour
             if (currentItems.Count < maxItems)
             {
                 // Generate a random item at a random spawn 
-                GameObject item = possibleItems[Random.Range(0, possibleItems.Length)];
+                GameObject item = possibleItemsWithRarity[Random.Range(0, possibleItemsWithRarity.Count)];
                 item.GetComponent<SpriteRenderer>().sortingOrder = 3;
 
                 Vector3 spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];

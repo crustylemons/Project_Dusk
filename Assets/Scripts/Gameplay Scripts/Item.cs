@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 
     [Header("Item Data")]
     [SerializeField] private string furnitureName;
-    [SerializeField] private string rarity;
+    [SerializeField] private int commonMultiplier;
 
     void Start()
     {
@@ -28,4 +28,6 @@ public class Item : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public int GetCommonMultiplier() { return commonMultiplier; }
 }

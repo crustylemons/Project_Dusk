@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: {fileID: 0}
   furnitureName: couch
-  rarity: 
+  commonMultiplier: 1

@@ -40,7 +40,7 @@ public class TypingTestInputController : MonoBehaviour
 
         // Animation
         catAnimator.SetBool("IsMoving", false);
-        tileMapController.SetCatIsRunning(false);
+        tileMapController.SetCatIsRunning(false); 
     }
 
     private void Update()
@@ -55,17 +55,15 @@ public class TypingTestInputController : MonoBehaviour
     // Gets Initiated from external sources
     public void StartTypingTest()
     {
-        StartCoroutine(TypingTestActions());
+        TypingTestActions();
 
+        // Generate words
         chosenPossibleWords = FindPoolOfWords();
         GenerateUpcomingText(chosenPossibleWords);
     }
 
-    public IEnumerator TypingTestActions()
+    public void TypingTestActions()
     {
-        // Delay
-        yield return new WaitForSeconds(0);
-
         // Animation
         catAnimator.SetBool("IsMoving", true);
         tileMapController.SetCatIsRunning(true);
@@ -135,10 +133,12 @@ public class TypingTestInputController : MonoBehaviour
 
     private IEnumerator GetPlayerInput()
     {
-        StartTestActions();
-        
-        audioController.StartCountDown();
+        // Clear previous data
+        correctCharactersTyped = 0;
+        charactersTyped = 0;
 
+        // Countdown
+        audioController.StartCountDown();
         yield return StartCoroutine(Timer(3));
         
 
@@ -177,14 +177,6 @@ public class TypingTestInputController : MonoBehaviour
         EndTestActions();
     }
 
-    private void StartTestActions()
-    {
-        // Clear previous data
-        correctCharactersTyped = 0;
-        charactersTyped = 0;
-
-    }
-
     private void EndTestActions()
     {
         // Give Data
@@ -202,13 +194,13 @@ public class TypingTestInputController : MonoBehaviour
     {
         timerIsGoing = true;
         int secondsLeft = seconds;
-        UIController.SetTimer(secondsLeft);
+        UIController.SetTimer(secondsLeft, true);
 
         for (int i = seconds; i > 0; i--)
         {
             yield return new WaitForSeconds(1);
             secondsLeft--;
-            UIController.SetTimer(secondsLeft);
+            UIController.SetTimer(secondsLeft, true);
         }
         timerIsGoing = false;
     }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,8 +7,8 @@ public class TileMapController : MonoBehaviour
 {
 
     [Header("Tile Maps")]
-    [SerializeField] private GameObject longGrassRbOne;
-    [SerializeField] private GameObject longGrassRbTwo;
+    [SerializeField] private GameObject longGrassOne;
+    [SerializeField] private GameObject longGrassTwo;
 
     [SerializeField] private float tileMapSpeed = 5.0f;
 
@@ -21,44 +22,49 @@ public class TileMapController : MonoBehaviour
     {
         if (catIsRunning)
         {
-            longGrassRbOne.transform.position = Vector2.MoveTowards(longGrassRbOne.transform.position, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
-            longGrassRbTwo.transform.position = Vector2.MoveTowards(longGrassRbTwo.transform.position, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
+            Vector2 grassOnePos = longGrassOne.transform.position;
+            Vector2 grassTwoPos = longGrassTwo.transform.position;
 
-            if (Mathf.RoundToInt(longGrassRbOne.transform.position.x) == -16)
+            longGrassOne.transform.position = Vector2.MoveTowards(grassOnePos, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
+            longGrassTwo.transform.position = Vector2.MoveTowards(grassTwoPos, new Vector2(-16, 0), tileMapSpeed * Time.deltaTime);
+
+            if (Mathf.Abs(grassOnePos.x - (-16f)) <= 0.1f)
             {
-                longGrassRbOne.transform.position = new Vector2(16, 0);
+                longGrassOne.transform.position = new Vector2(16, 0);
+                if (grassTwoPos.x > 0)
+                {
+                    longGrassTwo.transform.position = Vector2.MoveTowards(grassTwoPos, new Vector2(0, 0), tileMapSpeed * Time.deltaTime);
+                }
+                //longGrassRbTwo.transform.position = new Vector2(0, 0);
             }
 
-            if (Mathf.RoundToInt(longGrassRbTwo.transform.position.x) == -16)
+            if (Mathf.Abs(grassTwoPos.x - (-16f)) <= 0.1f)
             {
-                longGrassRbTwo.transform.position = new Vector2(16, 0);
+                longGrassTwo.transform.position = new Vector2(16, 0);
+                if (grassOnePos.x > 0)
+                {
+                    longGrassOne.transform.position = Vector2.MoveTowards(grassOnePos, new Vector2(0, 0), tileMapSpeed * Time.deltaTime);
+                }
+                //longGrassRbOne.transform.position = new Vector2(0, 0);
             }
+
+            //if (Mathf.RoundToInt(longGrassRbOne.transform.position.x) == -16)
+            //{
+            //    longGrassRbOne.transform.position = new Vector2(16, 0);
+            //    longGrassRbTwo.transform.position = new Vector2(0, 0);
+            //}
+
+            //if (Mathf.RoundToInt(longGrassRbTwo.transform.position.x) == -16)
+            //{
+            //    longGrassRbTwo.transform.position = new Vector2(16, 0);
+            //    longGrassRbOne.transform.position = new Vector2(0, 0);
+            //}
         }
         else
         {
             // Reset positions if the cat has stopped moving
-            longGrassRbOne.transform.position = new Vector2(0, 0);
-            longGrassRbTwo.transform.position = new Vector2(16, 0);
-        }
-    }
-
-    // Unfinished tile changing
-    private void UpdateTileMap(Tilemap tilemap)
-    {
-
-        BoundsInt bounds = tilemap.cellBounds;
-        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-
-        for (int x = 0; x < bounds.size.x; x++)
-        {
-            for (int y = 0; y < bounds.size.y; y++)
-            {
-                TileBase tile = allTiles[x + y * bounds.size.x];
-                if (tile != null)
-                {
-                    Debug.Log($"{tile.name} has the sprite ?");
-                }
-            }
+            longGrassOne.transform.position = new Vector2(0, 0);
+            longGrassTwo.transform.position = new Vector2(16, 0);
         }
     }
 
