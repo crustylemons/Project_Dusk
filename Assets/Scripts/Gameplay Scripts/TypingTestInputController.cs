@@ -184,6 +184,8 @@ public class TypingTestInputController : MonoBehaviour
         
         // UI
         UIController.EndTypingTest();
+        upcomingWordDisplay.text = "";
+        wordDisplay.text = "";
 
         // Animation
         catAnimator.SetBool("IsMoving", false);

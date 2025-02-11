@@ -18,25 +18,36 @@ public class TileMapController : MonoBehaviour
 
     private bool catIsRunning = false;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (catIsRunning)
         {
             Vector2 grassOnePos = longGrassOne.transform.position;
             Vector2 grassTwoPos = longGrassTwo.transform.position;
 
+            // Move the tile maps
             longGrassOne.transform.position = Vector2.MoveTowards(grassOnePos, new Vector2(-20, 0), tileMapSpeed * Time.deltaTime);
             longGrassTwo.transform.position = Vector2.MoveTowards(grassTwoPos, new Vector2(-20, 0), tileMapSpeed * Time.deltaTime);
+
+            // Round the position to nearest pixel-aligned position based on the PPU
+            float ppu = 128f;  // Pixels per Unit
+            longGrassOne.transform.position = new Vector2(
+                Mathf.Round(longGrassOne.transform.position.x * ppu) / ppu,
+                Mathf.Round(longGrassOne.transform.position.y * ppu) / ppu
+            );
+
+            longGrassTwo.transform.position = new Vector2(
+                Mathf.Round(longGrassTwo.transform.position.x * ppu) / ppu,
+                Mathf.Round(longGrassTwo.transform.position.y * ppu) / ppu
+            );
 
             if (Mathf.Abs(grassOnePos.x - (-20.0f)) <= 0.1f)
             {
                 longGrassOne.transform.position = new Vector2(20, 0);
                 if (grassTwoPos.x > 0)
                 {
-                    //longGrassTwo.transform.position = Vector2.MoveTowards(grassTwoPos, new Vector2(-1, 0), tileMapSpeed * Time.deltaTime);
                     longGrassTwo.transform.position = new Vector2(0, 0);
                 }
-                //longGrassRbTwo.transform.position = new Vector2(0, 0);
             }
 
             if (Mathf.Abs(grassTwoPos.x - (-20.0f)) <= 0.1f)

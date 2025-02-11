@@ -14,6 +14,7 @@ public class SaveDataManager : MonoBehaviour
     private int strayTrailsHighScore;
 
     [SerializeField] private bool hasHomeCutscenePlayed = false;
+    [SerializeField] private bool hasIntroPlayed = false;
 
     private void Awake()
     {
@@ -54,7 +55,6 @@ public class SaveDataManager : MonoBehaviour
                 catBed++; break;
             case "kirby":
                 kirby++;
-                Debug.Log("kirby was collected");
                 break;
             default:
                 Debug.Log("Couldn't find an item to update");
@@ -99,4 +99,8 @@ public class SaveDataManager : MonoBehaviour
     public int GetHighScore() { return strayTrailsHighScore; }
 
     public int GetRecentScore() { return strayTrailsRecentScore; }
+
+    public void IntroHasPlayed() { hasIntroPlayed = true; }
+
+    public bool HasIntroPlayed() {  return hasIntroPlayed; }
 }

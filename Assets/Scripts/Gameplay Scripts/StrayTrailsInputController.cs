@@ -113,15 +113,17 @@ public class StrayTrailsInputController : MonoBehaviour
     private IEnumerator UpdateItemUIPos(Item item, GameObject UIElement)
     {
         Vector2 velocity = Vector2.zero;
-        UIElement.transform.position = Camera.main.WorldToScreenPoint(item.transform.position);
+        UIElement.transform.position = Camera.main.WorldToScreenPoint(item.transform.position); // Set initial position
+
         while (!item.IsDestroyed())
         {
             Vector2 currentUIPos = UIElement.transform.position;
             Vector2 targetUIPos = Camera.main.WorldToScreenPoint(item.transform.position);
 
+            UIElement.transform.position = Vector2.SmoothDamp(currentUIPos, targetUIPos, ref velocity, 0.1f); // Move Target
             
-            UIElement.transform.position = Vector2.SmoothDamp(currentUIPos, targetUIPos, ref velocity, 0.1f);
-            yield return null;
+
+            yield return null; // Wait for next frame
         }
         Destroy(UIElement);
     }
