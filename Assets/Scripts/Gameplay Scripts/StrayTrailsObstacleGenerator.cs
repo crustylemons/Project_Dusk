@@ -11,7 +11,7 @@ public class StrayTrailsObstacleGenerator : MonoBehaviour
     [SerializeField] private TileMapController tileMapController;
 
     [Header("Obstacles")]
-    [SerializeField] private GameObject[] possibleObstacles;
+    [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private List<GameObject> currentObstacles;
 
     [Header("Obstacle Settings")]
@@ -27,7 +27,7 @@ public class StrayTrailsObstacleGenerator : MonoBehaviour
     void Start()
     {
         // Validate there are possible obstacles
-        if (possibleObstacles.Length == 0) { Debug.Log("There are no possible objects for Stray Trails Mode obstacles"); }        
+        if (!obstaclePrefab) { Debug.Log("There is possible object for Stray Trails Mode obstacles"); }        
     }
 
     void Update()
@@ -79,7 +79,7 @@ public class StrayTrailsObstacleGenerator : MonoBehaviour
             if (currentObstacles.Count < maxObstacles)
             {
                 // Generate a random obstacle at a random spawn 
-                GameObject obstacle = possibleObstacles[Random.Range(0, possibleObstacles.Length)];
+                GameObject obstacle = obstaclePrefab;
                 obstacle.GetComponent<SpriteRenderer>().sortingOrder = 3;
 
                 Vector3 spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];

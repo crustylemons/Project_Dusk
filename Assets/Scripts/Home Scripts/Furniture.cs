@@ -18,10 +18,7 @@ public class Furniture : MonoBehaviour
     private void Start()
     {
         // Ensure the object has a name
-        if (furnitureName == null)
-        {
-            furnitureName = gameObject.name;
-        }
+        furnitureName ??= gameObject.name;
 
         // Get saved data
         saveData = GameObject.FindWithTag("saveData").GetComponent<SaveDataManager>();
@@ -32,9 +29,7 @@ public class Furniture : MonoBehaviour
             {
 
                 // Visual Changes
-                SpriteRenderer r = gameObject.GetComponent<SpriteRenderer>();
-                Color color = new Color(r.color.r, r.color.g, r.color.b, 1f);
-                r.color = color;
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
             }
         }
     }

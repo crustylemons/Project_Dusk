@@ -590,8 +590,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Meow (Hello!)
-  - Meow meow meow (It's lovely to meet you)
+  - MEOWWWW
+  - Oh, you scared me!~
+  - Nice to meet you, I would tell you my name, but I was never given one.
+  - Let's find some place to chat...
   cutsceneName: IntroCutscene
   hasPlayed: 0
   playOnAwake: 1

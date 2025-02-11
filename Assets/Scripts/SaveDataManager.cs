@@ -4,14 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class SaveDataManager : MonoBehaviour
 {
-    //[Header("Script Connections")]
-    [SerializeField] private TypingTestStatsManager statsManager;
 
     // Data
     [SerializeField] private int itemsCollectedCount;
     private int couch;
     private int catBed;
-    private int plant;
+    private int kirby;
     private int strayTrailsRecentScore;
     private int strayTrailsHighScore;
 
@@ -32,30 +30,32 @@ public class SaveDataManager : MonoBehaviour
 
     public void FindStatsManager()
     {
-        // If it's in the game's scene, find statsManager
+        // If it's in the game's scene, find reset items collected count
         string sceneName = SceneManager.GetActiveScene().name;
 
         if (sceneName == "Gameplay")
         {
-            statsManager = FindAnyObjectByType<TypingTestStatsManager>();
             
 
             itemsCollectedCount = 0;
         }
     }
 
+    public void ResetTotalCollected () { itemsCollectedCount = 0; }
 
     public void UpdateCollectedItem(string ItemName)
     {
        // Find the correct object name and increment it
-       switch(ItemName.ToLower())
+       switch(ItemName.ToLower().Trim())
         {
             case "couch":
                 couch++; break;
             case "cat bed":
                 catBed++; break;
-            case "plant":
-                plant++; break;
+            case "kirby":
+                kirby++;
+                Debug.Log("kirby was collected");
+                break;
             default:
                 Debug.Log("Couldn't find an item to update");
                 break;
@@ -67,17 +67,13 @@ public class SaveDataManager : MonoBehaviour
 
     public int GetCollectedItemCount(string ItemName)
     {
-        switch (ItemName.ToLower())
+        return ItemName.ToLower().Trim() switch
         {
-            case "couch":
-                return couch;
-            case "cat bed":
-                return catBed;
-            case "plant":
-                return plant;
-            default: 
-                return 0;
-        }
+            "couch" => couch,
+            "cat bed" => catBed,
+            "kirby" => kirby,
+            _ => 0,
+        };
     }
 
 

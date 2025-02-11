@@ -11,6 +11,10 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     private void Start()
     {
+        if (AudioSource == null)
+        {
+            FindFirstObjectByType<AudioSource>();
+        }
 
         if (hoverSound == null)
         {

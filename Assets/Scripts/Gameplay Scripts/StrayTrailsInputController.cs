@@ -72,9 +72,10 @@ public class StrayTrailsInputController : MonoBehaviour
         isPlaying = false;
 
         // Tell other scripts that the game is over
+        scoreManager.StopScoring();
         tileMapController.SetCatIsRunning(false);
         UIController.StopStrayTrails();
-        scoreManager.StopScoring();
+        audioController.StopMusic();
     }
 
     public void AddItem(GameObject item)

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameUIController : MonoBehaviour
@@ -84,6 +86,10 @@ public class GameUIController : MonoBehaviour
 
     public void InitializePlayChoice()
     {
+        // Reset Values
+        endScoreText.GetComponent<Text>().text = "Score = 0";
+        totalItemsText.GetComponent<Text>().text = "Total Collected Items = 0";
+
         // Inactive
         wordBox.SetActive(false);
         typingTestBeginningBox.SetActive(false);
@@ -120,9 +126,6 @@ public class GameUIController : MonoBehaviour
 
         endScoreText.GetComponent<Text>().text = scoreString + score;
         totalItemsText.GetComponent<Text>().text = "Total Collected Items = " + saveData.GetTotalCollected().ToString();
-
-        //couchNumDisplay.GetComponent<Text>().text = saveData.Get
-        // Update Certain Numbers here
 
         // Active
         strayTrailsEndingBox.SetActive(true);

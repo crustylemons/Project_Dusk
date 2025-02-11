@@ -687,8 +687,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.532, y: -1.01775, z: 0}
-    m_Extent: {x: 1.7400999, y: 2.16965, z: 0}
+    m_Center: {x: -0.53419995, y: -1.0167, z: 0}
+    m_Extent: {x: 1.734, y: 2.1713, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -933,8 +933,8 @@ Transform:
   m_GameObject: {fileID: 554964668}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.66, y: -0.02, z: 0}
-  m_LocalScale: {x: 0.9416617, y: 1, z: 1}
+  m_LocalPosition: {x: -2.5, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1127337418}
@@ -954,7 +954,7 @@ MonoBehaviour:
   UIController: {fileID: 1417866744}
   furnitureName: cat bed
   collectedCount: 0
-  needToCollect: 5
+  needToCollect: 50
   onHoverSoundFX: {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
   audioSource: {fileID: 1101315975}
 --- !u!212 &554964671
@@ -998,8 +998,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: 6c523f626b7e2e848bbb7dd76c49f7c3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
+  m_Sprite: {fileID: -5513050994037168576, guid: 3d4ce41069478914c935e7957cd262ca, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1047,7 +1047,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.921875, y: 0.703125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4209,8 +4209,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.49050003, y: -1.0836, z: 0}
-    m_Extent: {x: 1.7736001, y: 2.2113, z: 0}
+    m_Center: {x: -0.5018, y: -1.0783999, z: 0}
+    m_Extent: {x: 1.7758999, y: 2.2065, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4785,8 +4785,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.4594, y: -0.9628, z: 0}
-    m_Extent: {x: 1.6717, y: 2.1517, z: 0}
+    m_Center: {x: -0.46820003, y: -0.96064997, z: 0}
+    m_Extent: {x: 1.6679001, y: 2.15325, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5833,7 +5833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fe688a4a29c5440b69e68b803adeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsManager: {fileID: 0}
   itemsCollectedCount: 0
   hasHomeCutscenePlayed: 0
 --- !u!4 &1656902179
@@ -7782,9 +7781,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Meow (What is this place?)
-  - Meow meuww (I don't think anyone lives here..?)
-  - Meow meow (What is that hole in the wall?)
+  - What is this place?
+  - HELLOOO IS ANYBODY THERE ?!
+  - ...
+  - I don't think anybody lives here.
+  - Hmm... what's that hole in the wall?
   - '[Drag your mouse to move around.]'
   cutsceneName: Enter House
   hasPlayed: 0
@@ -8129,8 +8130,8 @@ Transform:
   m_GameObject: {fileID: 2056213532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47, y: 1.61, z: 0}
-  m_LocalScale: {x: 1.9484, y: 1, z: 1}
+  m_LocalPosition: {x: -0.4, y: 1.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1127337418}
@@ -8150,7 +8151,7 @@ MonoBehaviour:
   UIController: {fileID: 1417866744}
   furnitureName: couch
   collectedCount: 0
-  needToCollect: 5
+  needToCollect: 100
   onHoverSoundFX: {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
   audioSource: {fileID: 1101315975}
 --- !u!212 &2056213535
@@ -8194,8 +8195,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: 6c523f626b7e2e848bbb7dd76c49f7c3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
+  m_Sprite: {fileID: 4483504832982471387, guid: 7206c10cdd7a91141a4882556bbad2d9, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8243,7 +8244,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.984375, y: 0.9140625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8264,7 +8265,7 @@ GameObject:
   - component: {fileID: 2139099619}
   - component: {fileID: 2139099621}
   m_Layer: 0
-  m_Name: Plant
+  m_Name: Kirby Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8279,8 +8280,8 @@ Transform:
   m_GameObject: {fileID: 2139099617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.09, y: -2.5891, z: 0}
-  m_LocalScale: {x: 0.9416617, y: 0.8583, z: 1}
+  m_LocalPosition: {x: 5.996, y: -2.254, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1127337418}
@@ -8298,9 +8299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 1417866744}
-  furnitureName: plant
+  furnitureName: kirby
   collectedCount: 0
-  needToCollect: 5
+  needToCollect: 80
   onHoverSoundFX: {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
   audioSource: {fileID: 1101315975}
 --- !u!212 &2139099620
@@ -8344,8 +8345,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: 6c523f626b7e2e848bbb7dd76c49f7c3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
+  m_Sprite: {fileID: -168421969075237668, guid: cc76b4fbc689f574db498b3c8c7ea57e, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8393,7 +8394,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.59375, y: 0.796875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

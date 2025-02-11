@@ -188,6 +188,10 @@ public class TypingTestInputController : MonoBehaviour
         // Animation
         catAnimator.SetBool("IsMoving", false);
         tileMapController.SetCatIsRunning(false);
+
+        // Audio
+        audioController.PlayTestFinished();
+        audioController.StopMusic();
     }
 
     private IEnumerator Timer(int seconds)
