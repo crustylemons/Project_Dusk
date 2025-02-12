@@ -590,10 +590,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - MEOWWWW
-  - Oh, you scared me!~
-  - Nice to meet you, I would tell you my name, but I was never given one.
-  - Let's find some place to chat...
+  - Meow.
+  - Oh, didn't expect company.
+  - Sorry about the sudden entrance! I was just taking a nap.
+  - But anyway, I'm actually on my way to find somewhere... quieter.
+  - Yeah... My current spot is... fine, but there's a lot of noise recently. Things
+    keep changing.
+  - I need somewhere peaceful, you know?
+  - A little nook by the fire, a soft bed, maybe a window with a view of the autumn
+    leaves. I could use some time to think.
+  - Would you be willing to help me out? I think I've found one that might work-
+    if you're headed that way.
+  - It won't be too much trouble, let's go!
   cutsceneName: IntroCutscene
   hasPlayed: 0
   playOnAwake: 1
@@ -725,9 +733,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.125
     width: 1
-    height: 1
+    height: 0.75
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -3326,9 +3334,9 @@ RectTransform:
   - {fileID: 25434367}
   m_Father: {fileID: 343882067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589833139

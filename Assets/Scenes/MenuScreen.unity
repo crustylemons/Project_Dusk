@@ -606,7 +606,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -650,11 +650,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 180
+  m_AssetsPPU: 192
   m_RefResolutionX: 1920
   m_RefResolutionY: 1080
-  m_CropFrame: 0
-  m_GridSnapping: 0
+  m_CropFrame: 2
+  m_GridSnapping: 2
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0
@@ -1312,6 +1312,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1968988181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1968988183}
+  - component: {fileID: 1968988182}
+  m_Layer: 0
+  m_Name: Cusor Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1968988182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968988181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85102ba89c068b3498c0da18348b8cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCursorVisible: 1
+  defaultCursorTexture: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+--- !u!4 &1968988183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968988181}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1288.2146, y: 915.041, z: -2.331661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2021179667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,3 +1517,4 @@ SceneRoots:
   - {fileID: 992349806}
   - {fileID: 1947484940}
   - {fileID: 249441900}
+  - {fileID: 1968988183}

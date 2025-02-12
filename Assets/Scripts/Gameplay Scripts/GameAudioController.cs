@@ -10,6 +10,7 @@ public class GameAudioController : MonoBehaviour
     [SerializeField] private AudioClip denied;
     [SerializeField] private AudioClip countDown;
     [SerializeField] private AudioClip finished;
+    [SerializeField] private AudioClip collect;
 
     public void PlayDenied()
     {
@@ -57,6 +58,14 @@ public class GameAudioController : MonoBehaviour
         if (finished)
         {
             audioSource.PlayOneShot(finished);
+        }
+    }
+
+    public void Collect()
+    {
+        if (collect)
+        {
+            audioSource.PlayOneShot(collect);
         }
     }
 }

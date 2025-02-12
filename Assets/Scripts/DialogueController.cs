@@ -14,7 +14,7 @@ public class DialogueController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isPrintingDialogue) { skipToFullText = true; }
+        if (Input.GetKeyDown(KeyCode.Space) && isPrintingDialogue || Input.GetKeyDown(KeyCode.Mouse0) && isPrintingDialogue) { skipToFullText = true; }
     }
 
     // Firewall for scenarios when printing dialogue isn't permitted
@@ -45,7 +45,7 @@ public class DialogueController : MonoBehaviour
             if (!skipToFullText)
             {
                 spaceToContinue.gameObject.SetActive(true);
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0));
                 yield return null;
             }
             skipToFullText = false;
@@ -70,12 +70,12 @@ public class DialogueController : MonoBehaviour
             {
                 dialogueText.text = givenDialogue;
                 spaceToContinue.gameObject.SetActive(true);
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0));
                 yield return null;
                 break;
             }
             dialogueText.text = currentPrint += c;
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 

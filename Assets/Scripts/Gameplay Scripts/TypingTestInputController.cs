@@ -156,8 +156,17 @@ public class TypingTestInputController : MonoBehaviour
                     yield return new WaitUntil(() => Input.anyKeyDown || !timerIsGoing);
                     if (Input.inputString.ToLower() == c.ToString().ToLower())
                     {
-                        typedDisplay.text += c;
-                        correctCharactersTyped++;
+                        // If it's a space
+                        if (c.ToString().ToLower() == " ")
+                        {
+                            typedDisplay.text += "_"; // substitute white space for "_" to make it clearer for the user
+                        }
+                        else
+                        {
+                            typedDisplay.text += c; // else just add the letter onto the typed display
+                            correctCharactersTyped++;
+                        }
+
                         break; // Exit the loop and proceed to the next character
                     }
                     else if (!Input.GetKeyUp(KeyCode.Escape))

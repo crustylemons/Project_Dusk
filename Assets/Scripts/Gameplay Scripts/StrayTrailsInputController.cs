@@ -107,6 +107,7 @@ public class StrayTrailsInputController : MonoBehaviour
         if (item != null)
         {
             item.Collect();
+            audioController.Collect();
         }
     }
 
@@ -120,8 +121,9 @@ public class StrayTrailsInputController : MonoBehaviour
             Vector2 currentUIPos = UIElement.transform.position;
             Vector2 targetUIPos = Camera.main.WorldToScreenPoint(item.transform.position);
 
-            UIElement.transform.position = Vector2.SmoothDamp(currentUIPos, targetUIPos, ref velocity, 0.1f); // Move Target
-            
+
+            //UIElement.transform.position = Vector2.SmoothDamp(currentUIPos, targetUIPos, ref velocity, 0.01f); // Move Target
+            UIElement.transform.position = new Vector2(targetUIPos.x + 75, targetUIPos.y + 75);
 
             yield return null; // Wait for next frame
         }

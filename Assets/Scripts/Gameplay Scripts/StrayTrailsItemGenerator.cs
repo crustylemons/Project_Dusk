@@ -63,7 +63,7 @@ public class StrayTrailsItemGenerator : MonoBehaviour
                     // Move Item
                     Vector2 target = new Vector2(itemDestroyPoint.x, item.transform.position.y);
 
-                    float itemSpeed = tileMapController.GetTileMapSpeed(); // speed is based on tile map speed
+                    float itemSpeed = tileMapController.GetTileMapSpeed(); // speed is based on tilemap
                     item.transform.position = Vector2.MoveTowards(item.transform.position, target, itemSpeed * Time.deltaTime);
 
                     // Round the position to the nearest multiple of 1/128 to match the PPU

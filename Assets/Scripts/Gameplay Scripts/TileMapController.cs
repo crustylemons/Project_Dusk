@@ -41,7 +41,7 @@ public class TileMapController : MonoBehaviour
                 Mathf.Round(longGrassTwo.transform.position.y * ppu) / ppu
             );
 
-            if (Mathf.Abs(grassOnePos.x - (-20.0f)) <= 0.1f)
+            if (Mathf.Abs(grassOnePos.x - (-20.0f)) <= 0.08f)
             {
                 longGrassOne.transform.position = new Vector2(20, 0);
                 if (grassTwoPos.x > 0)
@@ -50,7 +50,7 @@ public class TileMapController : MonoBehaviour
                 }
             }
 
-            if (Mathf.Abs(grassTwoPos.x - (-20.0f)) <= 0.1f)
+            if (Mathf.Abs(grassTwoPos.x - (-20.0f)) <= 0.08f)
             {
                 longGrassTwo.transform.position = new Vector2(20, 0);
                 if (grassOnePos.x > 0)
